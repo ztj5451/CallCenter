@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	 <color name="itemColor">#fffafafa</color>
+   <color name="divider">#E0E0E0</color>
+    <color name="my_green">#7FFF00</color>
+    <color name="my_background">#EBF2FC</color>
+    <color name="about_background">#d6e2ee</color>
+    <color name="message_background">#D9EBEF</color>
+    <color name="selected">#6699cc</color>
+    <color name="blue">#0077c0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="translucent_dark">#990000</color>
+    <color name="translucenter_dark">#bf0000</color>
+    <color name="bright_foreground_dark">#ffffff</color>
+    <color name="color1">#000000</color>
+    <color name="color2">#4499EE</color>
+    <color name="color3">#8EC2F5</color>
+    <color name="color4">#D6E9FC</color>
+    <color name="color5">#E7F2FD</color>
+    <color name="color6">#BEC0C2</color>
+    <color name="color7">#E6E8EB</color>
+    <color name="colormain0">#735bb3</color>
+    <color name="colormain1">#c3203f</color>
+    <color name="colormain2">#005097</color>
+    <color name="colormain3">#caea0d</color>
+    <color name="colormain4">#f08233</color>
+    <color name="colormain5">#964532</color>
+    <color name="colormain6">#054c8c</color>
+    <color name="colormain7">#ede8e5</color>
+    <color name="colormain8">#131814</color>
+    <color name="colormain9">#63bd0e</color>
+    <color name="tabbg">#009bc4</color>
+    <color name="Translucent">#e0000000</color>
+    <color name="Transparent">#00000000</color>
+    <color name="search_list">#4d044cba</color>
+    <!-- 自定义 -->
+    <color name="title_bar">#066296</color>
+    <color name="back_ground">#2385BF</color>
+    <color name="kq_background">#3f92c2</color>
+    <color name="body_background">#EEF3FA</color>
+    <color name="main_item">#EDEDEE</color>
+    <color name="user_info">#CCCCCC</color>
+    <color name="zffq">#5051AE</color>
+    <color name="zfdb">#46A5AB</color>
+    <color name="zfyb">#5E1252</color>
+    <color name="wzjy">#996633</color>
+    <color name="ydxc">#E34E30</color>
+    <color name="xxcz">#999900</color>
+    <color name="send_message">#07ABAC</color>
+    <color name="txl">#F0814C</color>
+    <color name="zx">#E4C52C</color>
+    <color name="kqqd">#02B194</color>
+    <color name="message">#F6F6FE</color>
+    <color name="gw_start">#79678D</color>
+    <color name="gw_wait">#23ACA2</color>
+    <color name="gw_done">#EAD5A8</color>
+    <color name="surround_qy">#7EAC6C</color>
+    <color name="cl">#077F98</color>
+    <color name="qy_info">#ED746C</color>
+    <color name="map">#EAD5A8</color>
+    <color name="set">#79678D</color>
+    <color name="about">#07ABAC</color>
+
+    <!-- weinxin -->
+
+    <color name="grey">#58616d</color>
+    <color name="darkgrey">#ff404040</color>
+    <color name="toasterro">#9fd524</color>
+    <color name="lightgrey">#ff888888</color>
+    <color name="semitransparent">#80000000</color>
+    <color name="lightransparent">#a0000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="navpage">#FFE1E8EB</color>
+
+</resources>

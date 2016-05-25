@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 应用程序中所需要用到的文字信息 -->
+    <string name="app_name">移动办公</string>
+    <!-- 登陆页面 -->
+    <string name="user_name">账号：</string>
+    <string name="user_password">密码：</string>
+    <string name="hint_username"> 请输入用户账号</string>
+    <string name="hint_password"> 请输入用户密码</string>
+    <string name="login_btn">登 录</string>
+    <string name="exit_btn">退 出</string>
+    <string name="rem_username">记住账号</string>
+    <string name="rem_userpassword">记住密码</string>
+    <string name="username_empty">登陆账号不能为空!</string>
+    <string name="password_empty">登陆密码不能为空!</string>
+    <string name="login_tip">温馨提示</string>
+    <string name="login_tip_message">是否要绑定当前手机?</string>
+    <!-- 个人信息 -->
+    <string name="personInfo">个人信息</string>
+    <!-- 退出 -->
+    <string name="app_ok">确  定</string>
+    <string name="app_cancel">取  消</string>
+    <string name="tip_message">您确定要退出该程序吗?</string>
+    <string name="tip_message2">你确定要删除此目录下的文件吗?</string>
+    <string name="backToo">再次返回退出当前应用程序！</string>
+    <string name="system_exit">当前系统操作</string>
+    <string name="tip">提  示</string>
+    <!-- 头部 -->
+    <string name="user_kq_no">未考勤</string>
+    <string name="user_kq">已考勤</string>
+    <string name="u_name">张三</string>
+    <string name="u_bm">财务部</string>
+    <string name="u_zw">会计</string>
+    <string name="bar_back">返回</string>
+    <string name="changeMap">切换</string>
+    <string name="edit">编辑</string>
+    <!-- 考勤签到 -->
+    <string name="kqqd_menu">考勤签到</string>
+    <string name="map">地图展示</string>
+    <string name="qy_details_info">企业详细信息</string>
+    <string name="gwstart">客服派单</string>
+    <string name="gwhandler">工单派发</string>
+    <string name="gwdone">工单跟踪</string>
+    <string name="gwfj">公文附件</string>
+    <string name="zbqy">周边企业</string>
+    <string name="qyinfo">企业信息</string>
+    <string name="sendmessage">发送通知</string>
+    <string name="sendMessage">发送</string>
+    <string name="messageSelect">请选择接收人</string>
+    <string name="sendToMobile">是否发送手机通知</string>
+    <string name="receiver"> 接  收  部  门 </string>
+    <string name="messageTitle">请输入发送通知标题</string>
+    <string name="messageContent">请输入发送通知内容</string>
+    <string name="sendList">当前没有发送通知的记录!</string>
+    <string name="sendMessageSuccess">通知发送成功！</string>
+    <string name="sendMessageFail">通知发送失败！</string>
+    <string name="messageDetail">通知详细</string>
+    <string name="txl">通讯录</string>
+    <string name="zxPerson">坐   席</string>
+    <string name="message">通知公告</string>
+    <string name="send_time">发送时间:</string>
+    <string name="call_time">呼入时间:</string>
+    <string name="send_bm">发送部门:</string>
+    <string name="myLocation">我的位置</string>
+    <string name="surroundLocation">周边企业位置</string>
+    <string name="qyLocation">企业所在位置</string>
+    <!-- 数据采集 -->
+    <string name="dataAcquisition">数据采集</string>
+    <!-- 公文 -->
+    <string name="gw_start">派  发</string>
+    <string name="add_attachment">添  加  附  件</string>
+    <string name="attachment_list">附  件  列  表</string>
+    <string name="gw_select">请选择接收单位</string>
+    <string name="gw_title">请输入备注信息</string>
+    <string name="gw_content">请输入服务简介</string>
+    <string name="gwStart_empty">当前没有已发起的公文</string>
+    <string name="gwWaiting_empty">当前没有要办理的公文</string>
+    <string name="delete_gw"> 删 除 </string>
+    <string name="gw_handle_yx">审批意向：</string>
+    <string name="handle">办  理</string>
+    <string name="handle_yj">请输入办理意见</string>
+    <string name="toBig">上传附件过大!</string>
+    <!-- 系统设置 -->
+    <string name="system_set">系统设置</string>
+    <string name="newPwd">新密码不能为空！</string>
+    <string name="confirmPwd">确认密码不能为空！</string>
+    <string name="pwdneq">新密码与确认密码不相同!</string>
+    <string name="newPass">新    密    码：</string>
+    <string name="oldPass">原    密    码：</string>
+    <string name="confirmPass">确认密码：</string>
+    <string name="newPassHint">请输入新密码</string>
+    <string name="confirmPassHint">请输入确认密码</string>
+    <string name="oldPassHint">请输入原密码</string>
+    <string name="oldPwd">原密码不能为空!</string>
+    <string name="changePass">修  改  密  码</string>
+    <string name="change">修  改</string>
+    <string name="update_software">软  件  更  新</string>
+
+    <!-- 关于 -->
+    <string name="about">关于</string>
+    <string name="company_name">长春市残联协会</string>
+    <string name="tel_call">电话咨询</string>
+    <string name="pro2me">问题反馈</string>
+    <string name="banquan">长春市残联协会  | 版权所有</string>
+    <!-- 弹出菜单 -->
+    <string-array name="kaoqin_item_no">
+        <item>签 到</item>
+    </string-array>
+    <string-array name="kaoqin_item_yes">
+        <item>结 束 签 到</item>
+    </string-array>
+    <string-array name="system_item">
+        <item>注 销 用 户</item>
+        <item>退 出 系 统</item>
+    </string-array>
+
+    <string name="sendMessage_manager">通 知 公 告 管 理</string>
+
+    <string-array name="message_del_all">
+        <item>全  部  清  空</item>
+    </string-array>
+
+    <string name="gwStart_manager">已  发  公  文  管  理</string>
+
+    <string-array name="gwStart_del">
+        <item>全  部  清  空</item>
+    </string-array>
+
+    <string name="select_attachment">上  传  附  件  管  理</string>
+
+    <string-array name="attachment_item">
+        <item>照  相  机</item>
+        <item>图  片  库</item>
+        <!-- <item>本  地  存  储  卡</item> -->
+    </string-array>
+
+</resources>

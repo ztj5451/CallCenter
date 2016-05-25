@@ -1,0 +1,260 @@
+package com.callCenter.entity;
+
+public class JdDetail {
+	private String bsjj;
+
+	public String getBsjj() {
+		return bsjj;
+	}
+
+	public void setBsjj(String bsjj) {
+		this.bsjj = bsjj;
+	}
+
+	private String jigou;
+
+	public String getJigou() {
+		return jigou;
+	}
+
+	public void setJigou(String jigou) {
+		this.jigou = jigou;
+	}
+
+	private String fwry;
+	
+	public String getFwry() {
+		return fwry;
+	}
+
+	public void setFwry(String fwry) {
+		this.fwry = fwry;
+	}
+
+	private String khName;
+	private String age;
+	private String sex;
+	private String address;
+	private String tel;
+	private String zbId;
+	private String khjj;
+	private String khgt;
+	private String startTime;
+	private String fwjj;
+	private String fwbz;
+	private String gwId;
+	private String sx;
+	private String jibie;
+	private String sheng;
+	private String shi;
+	private String qu;
+	private String jiedao;
+	private String sq;
+	private String zdy;
+	private String pic;
+	private String money;
+	private String lsh;
+	private String bz;
+	private String kfnum;
+
+	public String getKfnum() {
+		return kfnum;
+	}
+
+	public void setKfnum(String kfnum) {
+		this.kfnum = kfnum;
+	}
+
+	public String getBz() {
+		return bz;
+	}
+
+	public void setBz(String bz) {
+		this.bz = bz;
+	}
+
+	public String getKhName() {
+		return khName;
+	}
+
+	public void setKhName(String khName) {
+		this.khName = khName;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getZbId() {
+		return zbId;
+	}
+
+	public void setZbId(String zbId) {
+		this.zbId = zbId;
+	}
+
+	public String getKhjj() {
+		return khjj;
+	}
+
+	public void setKhjj(String khjj) {
+		this.khjj = khjj;
+	}
+
+	public String getKhgt() {
+		return khgt;
+	}
+
+	public void setKhgt(String khgt) {
+		this.khgt = khgt;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getFwjj() {
+		return fwjj;
+	}
+
+	public void setFwjj(String fwjj) {
+		this.fwjj = fwjj;
+	}
+
+	public String getFwbz() {
+		return fwbz;
+	}
+
+	public void setFwbz(String fwbz) {
+		this.fwbz = fwbz;
+	}
+
+	public String getGwId() {
+		return gwId;
+	}
+
+	public void setGwId(String gwId) {
+		this.gwId = gwId;
+	}
+
+	public String getSx() {
+		return sx;
+	}
+
+	public void setSx(String sx) {
+		this.sx = sx;
+	}
+
+	public String getJibie() {
+		return jibie;
+	}
+
+	public void setJibie(String jibie) {
+		this.jibie = jibie;
+	}
+
+	public String getSheng() {
+		return sheng;
+	}
+
+	public void setSheng(String sheng) {
+		this.sheng = sheng;
+	}
+
+	public String getShi() {
+		return shi;
+	}
+
+	public void setShi(String shi) {
+		this.shi = shi;
+	}
+
+	public String getQu() {
+		return qu;
+	}
+
+	public void setQu(String qu) {
+		this.qu = qu;
+	}
+
+	public String getJiedao() {
+		return jiedao;
+	}
+
+	public void setJiedao(String jiedao) {
+		this.jiedao = jiedao;
+	}
+
+	public String getSq() {
+		return sq;
+	}
+
+	public void setSq(String sq) {
+		this.sq = sq;
+	}
+
+	public String getZdy() {
+		return zdy;
+	}
+
+	public void setZdy(String zdy) {
+		this.zdy = zdy;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
+	}
+
+	public String getLsh() {
+		return lsh;
+	}
+
+	public void setLsh(String lsh) {
+		this.lsh = lsh;
+	}
+
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/title_bar"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <TextView
+                style="@style/title_barText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myLocation" />
+        </LinearLayout>
+
+        <include layout="@layout/back_btn" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" >
+
+            <Button
+                android:id="@+id/enter"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_ok"
+                android:text="@string/changeMap"
+                android:textColor="@color/white" />
+        </LinearLayout>
+       
+    </RelativeLayout>
+    <!-- 地图控件 -->
+
+    <com.callCenter.activity.MyMapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="80dip"
+        android:background="#ffffff"
+        android:minWidth="100dip"
+        android:orientation="vertical"
+        android:padding="2dp" >
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="定位icon" >
+
+            <RadioButton
+                android:id="@+id/defaulticon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="默认图标" >
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/customicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义图标" >
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="普通图" >
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/satellite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="卫星图" >
+            </RadioButton>
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/traffic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:onClick="setTraffic"
+            android:text="交通图" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/button_style"
+        android:text="定位"
+        android:textColor="#FF000000" />
+
+</LinearLayout>

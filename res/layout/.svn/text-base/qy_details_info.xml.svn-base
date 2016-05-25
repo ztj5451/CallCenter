@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBF2FC"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/title_bar"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <TextView
+                style="@style/title_barText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="企业详细信息" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_back"
+                android:text="@string/bar_back"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <include layout="@layout/loadprogress" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/about_top_bg"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/qyName"
+                    style="@style/qyTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="吉林省长春市人民大街" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/about_mid_bg"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/qyinfo_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="企业地址:" />
+
+                <TextView
+                    android:id="@+id/qyAddress"
+                    style="@style/qyinfo_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="吉林省长春市xxxx大街" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/about_mid_bg"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/qyinfo_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="从业人数:" />
+
+                <TextView
+                    android:id="@+id/cyNumber"
+                    style="@style/qyinfo_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20人" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/about_bottom_bg"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/qyinfo_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="地图位置:" />
+
+                <TextView
+                    android:id="@+id/mapLocation"
+                    style="@style/qyinfo_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="查看企业位置" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

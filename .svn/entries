@@ -1,0 +1,134 @@
+8
+
+dir
+1
+https://2013-20131216el:4433/svn/CallCenter/CallCenter
+https://2013-20131216el:4433/svn/CallCenter
+
+
+
+2014-07-08T04:31:25.096183Z
+1
+ztj_5451
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+72686e68-1743-4d41-81fc-b9a8d975f351
+
+.classpath
+file
+2
+
+
+
+2014-04-21T13:36:39.002000Z
+e43b9e994685d1055e421f721677fe94
+2014-07-08T04:32:14.424004Z
+2
+ztj_5451
+
+.project
+file
+2
+
+
+
+2014-04-21T13:36:20.188000Z
+a8a81ab29ba968bbbb4cc0941166cd47
+2014-07-08T04:32:14.424004Z
+2
+ztj_5451
+
+.settings
+dir
+
+AndroidManifest.xml
+file
+3
+
+
+
+2014-07-19T08:04:23.516000Z
+05a07440cd91c20423444fe6c63e40e1
+2014-07-23T11:59:56.647076Z
+3
+ztj_5451
+
+assets
+dir
+
+bin
+dir
+
+gen
+dir
+
+ic_launcher-web.png
+file
+2
+
+
+delete
+2014-04-21T13:36:21.763000Z
+03162f4ee138bcbae36f78b1d25dbd5b
+2014-07-08T04:32:14.424004Z
+2
+ztj_5451
+has-props
+
+libs
+dir
+
+previews.xml
+file
+2
+
+
+
+2014-06-16T15:06:59.311000Z
+25ed64f7e3b65ea5dbb3572d42cadf95
+2014-07-08T04:32:14.424004Z
+2
+ztj_5451
+
+proguard-project.txt
+file
+2
+
+
+
+2014-04-21T13:36:20.235000Z
+18bfe77c342b4698f1cef19cf8d918e2
+2014-07-08T04:32:14.424004Z
+2
+ztj_5451
+
+project.properties
+file
+2
+
+
+
+2014-04-21T13:36:23.791000Z
+6bc29827a20f0391406586601017da3b
+2014-07-08T04:32:14.424004Z
+2
+ztj_5451
+
+res
+dir
+
+src
+dir
+

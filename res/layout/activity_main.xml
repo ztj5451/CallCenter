@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#00bfff"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btOpenDialogue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:background="#00A398"
+        android:onClick="openPortDialogueClicked"
+        android:text="打开蓝牙连接" />
+
+    <Button
+        android:id="@+id/btPrintTestPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#00A398"
+        android:onClick="printTestPageClicked"
+        android:text="打印测试页" />
+
+    <Button
+        android:id="@+id/btGetStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#00A398"
+        android:onClick="getPrinterStatusClicked"
+        android:text="获取打印机状态" />
+
+    <Button
+        android:id="@+id/btGetPrinterCommandType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#00A398"
+        android:onClick="getPrinterCommandTypeClicked"
+        android:text="获取命令类型" />
+
+    <Button
+        android:id="@+id/btPrintReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#00A398"
+        android:onClick="printReceiptClicked"
+        android:text="打印收据" />
+
+    <Button
+        android:id="@+id/btPrintLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#00A398"
+        android:onClick="printLabelClicked"
+        android:text="打印标签" />
+
+    <EditText
+        android:id="@+id/etPrintCopies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:inputType="number"
+        android:text="2" />
+
+    <Button
+        android:id="@+id/btPrintTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#00A398"
+        android:onClick="printTestClicked"
+        android:text="连续打印" />
+
+</LinearLayout>

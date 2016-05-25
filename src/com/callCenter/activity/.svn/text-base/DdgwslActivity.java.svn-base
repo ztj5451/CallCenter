@@ -1,0 +1,182 @@
+package com.callCenter.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.callCenter.adapter.DdgwslAdapter;
+import com.callCenter.adapter.ServerPersonJDAdapter;
+import com.callCenter.entity.Ddgwsl;
+import com.callCenter.entity.ServerPersonJD;
+import com.callCenter.utils.HandlerException;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.SettingUtils;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+public class DdgwslActivity extends Activity {
+	private ListView ddgwslListView;
+	private SettingUtils settingUtils;
+	private String loginname, uid;
+	private DdgwslAdapter adapter;
+	private List<Ddgwsl> ddgwslList;
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case HandlerException.Success:
+				adapter = new DdgwslAdapter(DdgwslActivity.this, ddgwslList);
+				ddgwslListView.setAdapter(adapter);
+				adapter.notifyDataSetChanged();
+				break;
+			case HandlerException.Fail:
+				break;
+			case HandlerException.HttpURLConnection_not_HTTP_OK:
+				break;
+			case HandlerException.IOException:
+				break;
+			default:
+
+				break;
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.ddgwsl);
+		init();
+		Event();
+
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		new Thread() {
+			public void run() {
+				ddgwslAction(ddgwslUrl());
+			};
+		}.start();
+	}
+
+	private void init() {
+		loginname = getIntent().getExtras().getString("loginname");
+		uid = getIntent().getExtras().getString("uid");
+		settingUtils = new SettingUtils(DdgwslActivity.this);
+		ddgwslListView = (ListView) this.findViewById(R.id.ddgwslListView);
+
+	}
+
+	private void Event() {
+
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						DdgwslActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+					}
+				});
+		// 点击事件
+		ddgwslListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				String gdId = ddgwslList.get(position).getId();
+				Intent intent = new Intent(DdgwslActivity.this,
+						JdDetailActivity.class);
+				intent.putExtra("gdId", gdId);
+
+				startActivity(intent);
+				overridePendingTransition(R.anim.in_from_right,
+						R.anim.out_to_left);
+			}
+		});
+	}
+
+	// 公文发起URL
+	private StringBuffer ddgwslUrl() {
+		StringBuffer ddgwslUrl = new StringBuffer(SettingUtils.get("serverIp"));
+		ddgwslUrl.append(SettingUtils.get("ddgwsl_list_url")).append("uid=")
+				.append(uid);
+		System.out.println("调度公文受理url:" + ddgwslUrl);
+		return ddgwslUrl;
+	}
+
+	private void ddgwslAction(StringBuffer ddgwslUrl) {
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					ddgwslUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				message=message.replaceAll("null", "");
+				JSONObject object = new JSONObject(message);
+				JSONArray array = new JSONArray(object.getString("contents"));
+				if (array.length() != 0) {
+					ddgwslList = new ArrayList<Ddgwsl>();
+					for (int i = 0; i < array.length(); i++) {
+						JSONObject obj = array.getJSONObject(i);
+						Ddgwsl ddgwsl = new Ddgwsl();
+						ddgwsl.setId(obj.getString("id"));
+						ddgwsl.setLsh(obj.getString("lsh"));
+						ddgwsl.setKhName(obj.getString("kh_name"));
+						ddgwsl.setAddress(obj.getString("kh_address"));
+						ddgwsl.setTel(obj.getString("kh_tel"));
+						ddgwsl.setTime(obj.getString("times"));
+						ddgwsl.setStartTime(obj.getString("starttime"));
+						ddgwsl.setHz(obj.getString("hz"));
+						ddgwsl.setTuidan(obj.getString("tuidan"));
+						ddgwsl.setZt(obj.getString("zt"));
+						ddgwsl.setJibie(obj.getString("jibie"));
+						ddgwslList.add(ddgwsl);
+					}
+					handler.sendEmptyMessage(HandlerException.Success);
+				} else {
+					handler.sendEmptyMessage(HandlerException.Fail);
+				}
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.IOException);
+		}
+	}
+
+	// 按下返回按钮
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			DdgwslActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

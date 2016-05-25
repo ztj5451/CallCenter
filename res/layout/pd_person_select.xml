@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/background_color"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="80dp"
+                android:background="@drawable/my_title"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/title_barText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="派单人员选择" />
+            </LinearLayout>
+        </LinearLayout>
+
+       <include layout="@layout/back_btn_layout"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" >
+
+            <Button
+                android:id="@+id/pd"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_ok"
+                android:text="派单"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/selectListView"
+            style="@style/listView_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/divider"
+            android:dividerHeight="0.5dp" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,201 @@
+package com.callCenter.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.callCenter.adapter.GwspAdapter;
+import com.callCenter.entity.Gwsp;
+import com.callCenter.utils.HandlerException;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.SettingUtils;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+public class GwspActivity extends Activity {
+	private static Context mContext;
+	public static String loginname;
+	private SettingUtils settingUtils;
+	private static ListView gwspListView;
+	private static List<Gwsp> gwspList;
+	private static GwspAdapter adpter;
+	public static Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case HandlerException.Success:
+				adpter = new GwspAdapter(mContext, gwspList);
+				gwspListView.setAdapter(adpter);
+				adpter.notifyDataSetChanged();
+
+				break;
+			case HandlerException.Fail:
+				break;
+			case HandlerException.HttpURLConnection_not_HTTP_OK:
+				break;
+			case HandlerException.IOException:
+				break;
+			case HandlerException.Over:
+				new Thread() {
+					public void run() {
+						gwspAction(gwspUrl());
+					};
+				}.start();
+				adpter = new GwspAdapter(mContext, gwspList);
+				gwspListView.setAdapter(adpter);
+				adpter.notifyDataSetChanged();
+				break;
+			default:
+
+				break;
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		mContext = this;
+		setContentView(R.layout.gwsp);
+		init();
+		Event();
+
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		new Thread() {
+			public void run() {
+				gwspAction(gwspUrl());
+			};
+		}.start();
+	}
+
+	private void init() {
+		settingUtils = new SettingUtils(GwspActivity.this);
+		gwspListView = (ListView) this.findViewById(R.id.gwspListView);
+		loginname = getIntent().getExtras().getString("loginname");
+	}
+
+	private void Event() {
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						GwspActivity.this.finish();
+
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+					}
+				});
+		// listview 点击事件
+		gwspListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				String tempId = gwspList.get(position).getId();
+				String tempGwid = gwspList.get(position).getGwid();
+				String bmId = gwspList.get(position).getBmId();
+				Intent intent = new Intent(GwspActivity.this,
+						GwspDetailActivity.class);
+				intent.putExtra("id", tempId);
+				intent.putExtra("gwid", tempGwid);
+				intent.putExtra("loginname", loginname);
+				intent.putExtra("bmId", bmId);
+				startActivity(intent);
+				overridePendingTransition(R.anim.in_from_right,
+						R.anim.out_to_left);
+			}
+		});
+
+	}
+
+	// 公文发起URL
+	private static StringBuffer gwspUrl() {
+		StringBuffer gwsptUrl = new StringBuffer(SettingUtils.get("serverIp"));
+		gwsptUrl.append(SettingUtils.get("gwsp_list_url")).append("loginname=")
+				.append(loginname);
+		System.out.println("公文审批url:" + gwsptUrl);
+		return gwsptUrl;
+	}
+
+	// 工单派发
+	private static void gwspAction(StringBuffer gwsptUrl) {
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					gwsptUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				message = message.replaceAll("null", "");
+				JSONObject object = new JSONObject(message);
+				JSONArray array = object.getJSONArray("contents");
+				if (array.length() != 0) {
+					gwspList = new ArrayList<Gwsp>();
+					gwspList.clear();
+					for (int i = 0; i < array.length(); i++) {
+						Gwsp gwsp = new Gwsp();
+						JSONObject obj = array.getJSONObject(i);
+						gwsp.setId(obj.getString("id"));
+						gwsp.setGwid(obj.getString("gwid"));
+						gwsp.setLsh(obj.getString("lsh"));
+						gwsp.setKhName(obj.getString("kh_name"));
+						gwsp.setKhAddress(obj.getString("kh_address"));
+						gwsp.setTel(obj.getString("kh_tel"));
+						gwsp.setJibie(obj.getString("jibie"));
+						gwsp.setStartTime(obj.getString("starttime"));
+						gwsp.setUsername(obj.getString("username"));
+						gwsp.setJdbmname(obj.getString("jdbmname"));
+						gwsp.setTimes(obj.getString("times"));
+						gwsp.setWcTimes(obj.getString("wctimes"));
+						gwsp.setZt(obj.getString("zt"));
+						gwsp.setBmId(obj.getString("bmid"));
+						gwspList.add(gwsp);
+					}
+					handler.sendEmptyMessage(HandlerException.Success);
+				}
+				handler.sendEmptyMessage(HandlerException.Fail);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.IOException);
+		}
+	}
+
+	// 按下返回按钮
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			GwspActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

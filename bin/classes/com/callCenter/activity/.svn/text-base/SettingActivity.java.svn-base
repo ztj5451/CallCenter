@@ -1,0 +1,241 @@
+package com.callCenter.activity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.callCenter.entity.LoginUser;
+import com.callCenter.utils.EditTextTool;
+import com.callCenter.utils.HandlerException;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.Md5Encrypt;
+import com.callCenter.utils.SettingUtils;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.Toast;
+
+/**
+ * 系统设置Activity
+ * 
+ * @author Administrator
+ * 
+ */
+public class SettingActivity extends Activity {
+	private LoginUser loginUser;
+	private EditText newPwd, confirmPwd, oldPwd;
+	private String new_pwd, confirm_pwd, old_pwd;
+
+	private boolean flag = false;
+	private ProgressDialog progressDialog;
+	private Handler handler = new Handler() {
+		public void handleMessage(Message message) {
+			switch (message.what) {
+			case HandlerException.Success:
+				progressDialog.dismiss();
+				Toast.makeText(SettingActivity.this, "密码修改成功!",
+						Toast.LENGTH_LONG).show();
+				// 清空数据
+				clearData();
+				break;
+			case HandlerException.Fail:
+				progressDialog.dismiss();
+				Toast.makeText(SettingActivity.this, "密码修改失败，请重试!",
+						Toast.LENGTH_LONG).show();
+				break;
+			default:
+
+				break;
+
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.systemsetting);
+		init();
+		Event();
+	}
+
+	// 初始化
+	private void init() {
+		loginUser = (LoginUser) getIntent().getExtras().getSerializable(
+				"loginUser");
+		newPwd = (EditText) this.findViewById(R.id.newPwd);
+		confirmPwd = (EditText) this.findViewById(R.id.confirmPwd);
+		oldPwd = (EditText) this.findViewById(R.id.oldPwd);
+	}
+
+	// 密码修改成功 清空数据
+	private void clearData() {
+		newPwd.setText("");
+		confirmPwd.setText("");
+		oldPwd.setText("");
+	}
+
+	// 用户密码校验
+	private boolean checkPwd() {
+		new_pwd = newPwd.getText().toString().trim();
+		confirm_pwd = confirmPwd.getText().toString().trim();
+		old_pwd = oldPwd.getText().toString().trim();
+		if (new_pwd.length() == 0) {
+			EditTextTool.editShakeAndFocus(SettingActivity.this, newPwd,
+					R.string.newPwd, 1);
+			return false;
+		} else if (confirm_pwd.length() == 0) {
+			EditTextTool.editShakeAndFocus(SettingActivity.this, confirmPwd,
+					R.string.confirmPwd, 1);
+			return false;
+		} else if (!confirm_pwd.equals(new_pwd)) {
+			EditTextTool.editShakeAndFocus(SettingActivity.this, newPwd,
+					R.string.pwdneq, 1);
+			return false;
+		} else if (old_pwd.length() == 0) {
+			EditTextTool.editShakeAndFocus(SettingActivity.this, oldPwd,
+					R.string.oldPwd, 1);
+			return false;
+		}
+		return true;
+	}
+
+	// 按钮点击事件
+	private void Event() {
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						SettingActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+					}
+				});
+		// 修改密码
+		this.findViewById(R.id.changePwd).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View view) {
+						// TODO Auto-generated method stub
+						// 显示或消失 输入修改密码
+						if (!flag) {
+							SettingActivity.this.findViewById(R.id.input)
+									.setVisibility(View.VISIBLE);
+							flag = true;
+						} else {
+							SettingActivity.this.findViewById(R.id.input)
+									.setVisibility(View.GONE);
+							flag = false;
+						}
+					}
+				});
+		// 修改
+		this.findViewById(R.id.change).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						if (checkPwd()) {
+							progressDialog = ProgressDialog
+									.show(SettingActivity.this, "温馨提示",
+											"密码修改中请稍候...");
+							new Thread() {
+								public void run() {
+									changeUserPWD(getChangePwdUrl());
+								};
+							}.start();
+						}
+					}
+				});
+		// 取消
+		this.findViewById(R.id.cancel).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						if (!flag) {
+							SettingActivity.this.findViewById(R.id.input)
+									.setVisibility(View.VISIBLE);
+							flag = true;
+						} else {
+							SettingActivity.this.findViewById(R.id.input)
+									.setVisibility(View.GONE);
+							flag = false;
+						}
+					}
+				});
+	}
+
+	// 修改密码
+	private StringBuffer getChangePwdUrl() {
+		StringBuffer pwdUrl = new StringBuffer(SettingUtils.get("serverIp"));
+		pwdUrl.append(SettingUtils.get("change_pwd_url"))
+				.append("oldPassword=").append(Md5Encrypt.md5(old_pwd))
+				.append("&newPassword=").append(Md5Encrypt.md5(new_pwd))
+				.append("&uid=").append(loginUser.getId());
+		return pwdUrl;
+	}
+
+	// 修改密码网络连接
+	private void changeUserPWD(StringBuffer pwdUrl) {
+
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					pwdUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+
+				// String message = HttpConnectUtil
+				// .getHttpStream(httpURLConnection);
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				JSONObject object = new JSONObject(message);
+				if (object.getString("flag").equals("1")) {
+					handler.sendEmptyMessage(HandlerException.Success);
+				} else {
+					handler.sendEmptyMessage(HandlerException.Fail);
+				}
+
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.Fail);
+		}
+
+	}
+
+	// 返回键
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			SettingActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+}

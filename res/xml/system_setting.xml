@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="呼叫铃声设置" />
+
+    <ListPreference
+        android:dialogTitle="呼叫铃音设置"
+        android:entries="@array/bells"
+        android:entryValues="@array/bells"
+        android:key="bell_value"
+        android:title="呼叫铃音设置" >
+    </ListPreference>
+
+</PreferenceScreen>

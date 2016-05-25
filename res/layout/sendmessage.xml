@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/title_bar"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <TextView
+                style="@style/title_barText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sendmessage" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_back"
+                android:text="@string/bar_back"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" >
+
+            <Button
+                android:id="@+id/sendMessage"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_ok"
+                android:text="@string/sendMessage"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- 显示通知公告 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TabHost
+            android:id="@+id/tabhost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:id="@+id/sending"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="3dp"
+                            android:orientation="vertical" >
+
+                            <EditText
+                                android:id="@+id/receiver"
+                                style="@style/MMLineEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:hint="@string/messageSelect"
+                                android:inputType="none"
+                                android:singleLine="true" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp" >
+
+                                <TextView
+                                    style="@style/main_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="8dp"
+                                    android:text="@string/sendToMobile" />
+
+                                <Button
+                                    android:id="@+id/select"
+                                    style="@style/MMLineActionButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="@string/receiver" />
+
+                                <Button
+                                    android:id="@+id/sendToMobile"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_toLeftOf="@id/select"
+                                    android:background="@drawable/check_checked" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/messageTitle"
+                            style="@style/MMLineEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="3dp"
+                            android:hint="@string/messageTitle" />
+
+                        <EditText
+                            android:id="@+id/messageContent"
+                            style="@style/MMLineEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:gravity="top"
+                            android:hint="@string/messageContent"
+                            android:lines="5" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/sended"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <ListView
+                            android:id="@+id/send_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbars="none" >
+                        </ListView>
+                    </RelativeLayout>
+                </FrameLayout>
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/tab_background" />
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
+
+</LinearLayout>

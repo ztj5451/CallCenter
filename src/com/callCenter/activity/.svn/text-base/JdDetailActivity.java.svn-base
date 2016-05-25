@@ -1,0 +1,199 @@
+package com.callCenter.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+
+import org.json.JSONObject;
+
+import com.callCenter.activity.R.id;
+import com.callCenter.entity.JdDetail;
+import com.callCenter.utils.HandlerException;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.SettingUtils;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.TextView;
+
+public class JdDetailActivity extends Activity {
+	private TextView bsjbTextView, nameTextView, ageTextView, sexTextView,
+			sxTextView, addressTextView, telTextView, shengTextView,
+			shiTextView, quTextView, jiedaoTextView, sqTextView, zdyTextView,
+			gtndTextView, khjjTextView, moneyTextView, lshTextView,
+			startTimeTextView, fwjjTextView, fwbzTextView, jdbmbzTextView;
+
+	private SettingUtils settingUtils;
+	private String gdId;
+	private JdDetail jdDetail;
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case HandlerException.Success:
+				setValue();
+				break;
+			case HandlerException.Fail:
+				break;
+			case HandlerException.HttpURLConnection_not_HTTP_OK:
+				break;
+			case HandlerException.IOException:
+				break;
+			default:
+
+				break;
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.jd_detail);
+		init();
+		Event();
+		new Thread() {
+			public void run() {
+				jdDetailAction(jdDetailUrl(gdId));
+			};
+		}.start();
+	}
+
+	private void init() {
+		settingUtils = new SettingUtils(JdDetailActivity.this);
+		gdId = getIntent().getExtras().getString("gdId");
+		bsjbTextView = (TextView) this.findViewById(R.id.bsjb);
+		nameTextView = (TextView) this.findViewById(R.id.name);
+		ageTextView = (TextView) this.findViewById(R.id.age);
+		sexTextView = (TextView) this.findViewById(R.id.kh_sex);
+		sxTextView = (TextView) this.findViewById(R.id.sx);
+		addressTextView = (TextView) this.findViewById(R.id.address);
+		telTextView = (TextView) this.findViewById(R.id.tel);
+		shengTextView = (TextView) this.findViewById(R.id.sheng);
+		shiTextView = (TextView) this.findViewById(R.id.shi);
+		quTextView = (TextView) this.findViewById(R.id.qu);
+		jiedaoTextView = (TextView) this.findViewById(R.id.jiedao);
+		sqTextView = (TextView) this.findViewById(R.id.shequ);
+		zdyTextView = (TextView) this.findViewById(R.id.zdy);
+		gtndTextView = (TextView) this.findViewById(R.id.gtnd);
+		khjjTextView = (TextView) this.findViewById(R.id.khjj);
+		moneyTextView = (TextView) this.findViewById(R.id.money);
+		lshTextView = (TextView) this.findViewById(R.id.lsh);
+		startTimeTextView = (TextView) this.findViewById(R.id.startTime);
+		fwjjTextView = (TextView) this.findViewById(R.id.fwjj);
+		fwbzTextView = (TextView) this.findViewById(R.id.fwbz);
+		jdbmbzTextView = (TextView) this.findViewById(R.id.jdbmbz);
+	}
+
+	private void setValue() {
+		bsjbTextView.setText(jdDetail.getJibie());
+		nameTextView.setText(jdDetail.getKhName());
+		ageTextView.setText(jdDetail.getAge());
+		sexTextView.setText(jdDetail.getSex());
+		sxTextView.setText(jdDetail.getSx());
+		addressTextView.setText(jdDetail.getAddress());
+		telTextView.setText(jdDetail.getTel());
+		shengTextView.setText(jdDetail.getSheng());
+		shiTextView.setText(jdDetail.getShi());
+		quTextView.setText(jdDetail.getQu());
+		jiedaoTextView.setText(jdDetail.getJiedao());
+		sqTextView.setText(jdDetail.getSq());
+		zdyTextView.setText(jdDetail.getZdy());
+		gtndTextView.setText(jdDetail.getKhgt());
+		khjjTextView.setText(jdDetail.getKhjj());
+		moneyTextView.setText(jdDetail.getMoney());
+		lshTextView.setText(jdDetail.getLsh());
+		startTimeTextView.setText(jdDetail.getStartTime());
+		fwjjTextView.setText(jdDetail.getFwjj());
+		fwbzTextView.setText(jdDetail.getFwbz());
+		jdbmbzTextView.setText(jdDetail.getBz());
+	}
+
+	private void Event() {
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						JdDetailActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+
+					}
+				});
+	}
+
+	// 公文发起URL
+	private StringBuffer jdDetailUrl(String gdId) {
+		StringBuffer jdDetailUrl = new StringBuffer(
+				SettingUtils.get("serverIp"));
+		jdDetailUrl.append(SettingUtils.get("serverPerson_detail_url"))
+				.append("id=").append(gdId);
+		// System.out.println("接单详细:" + jdDetailUrl);
+		return jdDetailUrl;
+	}
+
+	// 工单派发
+	private void jdDetailAction(StringBuffer jdDetailUrl) {
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					jdDetailUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				message=message.replaceAll("null", "");
+				JSONObject object = new JSONObject(message);
+				String temp = object.getString("contents");
+				JSONObject obj = new JSONObject(temp);
+				jdDetail = new JdDetail();
+				jdDetail.setJibie(obj.getString("jibie"));
+				jdDetail.setKhName(obj.getString("kh_name"));
+				jdDetail.setAge(obj.getString("kh_age"));
+				jdDetail.setSex(obj.getString("kh_sex"));
+				jdDetail.setSx(obj.getString("kh_sx"));
+				jdDetail.setAddress(obj.getString("kh_address"));
+				jdDetail.setTel(obj.getString("kh_tel"));
+				jdDetail.setSheng(obj.getString("sheng"));
+				jdDetail.setShi(obj.getString("shi"));
+				jdDetail.setQu(obj.getString("qu"));
+				jdDetail.setJiedao(obj.getString("jiedao"));
+				jdDetail.setSq(obj.getString("sq"));
+				jdDetail.setZdy(obj.getString("zdy"));
+				jdDetail.setKhgt(obj.getString("kh_goutong"));
+				jdDetail.setKhjj(obj.getString("kh_jj"));
+				jdDetail.setMoney(obj.getString("moneys"));
+				jdDetail.setLsh(obj.getString("lsh"));
+				jdDetail.setStartTime(obj.getString("starttime"));
+				jdDetail.setFwjj(obj.getString("jianjie"));
+				jdDetail.setFwbz(obj.getString("beizhu"));
+				jdDetail.setBz(obj.getString("zbbeizhu"));
+				handler.sendEmptyMessage(HandlerException.Success);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.IOException);
+		}
+	}
+
+	// 按下返回按钮
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			JdDetailActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

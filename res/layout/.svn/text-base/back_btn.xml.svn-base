@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="65dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/ic_bar_back"
+        android:text="@string/bar_back"
+        android:textColor="@color/white" />
+
+</LinearLayout>

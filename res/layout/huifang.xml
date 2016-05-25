@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/about_background"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/background_color"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/my_title"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/title_barText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回  访" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <include layout="@layout/back_btn_layout"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/about_top_bg"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回访内容" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/about_top_bg"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/hfnr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mm_edit"
+                android:gravity="left"
+                android:lines="4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/about_bottom_bg"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/jshf"
+                style="@style/MMLineActionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="结束回访" />
+
+            <Button
+                android:id="@+id/jxhf"
+                style="@style/MMLineActionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="继续回访" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

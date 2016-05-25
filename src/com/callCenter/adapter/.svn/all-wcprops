@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter
+END
+GwspAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/adapter/GwspAdapter.java
+END
+GwStartAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/GwStartAdapter.java
+END
+TxlAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/TxlAdapter.java
+END
+SelectMediaAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/SelectMediaAdapter.java
+END
+DdgwslAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/adapter/DdgwslAdapter.java
+END
+SendedMessageAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/SendedMessageAdapter.java
+END
+SurroundQyAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/SurroundQyAdapter.java
+END
+WorkOrderAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/WorkOrderAdapter.java
+END
+FirstAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/FirstAdapter.java
+END
+ReceiveMessageAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/ReceiveMessageAdapter.java
+END
+CallCenterAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/CallCenterAdapter.java
+END
+GwGzAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/GwGzAdapter.java
+END
+DetailAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/DetailAdapter.java
+END
+RechargeAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/RechargeAdapter.java
+END
+GwpfAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/adapter/GwpfAdapter.java
+END
+SelectedMediaAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/SelectedMediaAdapter.java
+END
+PictureListAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/PictureListAdapter.java
+END
+ServerPersonJDAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/adapter/ServerPersonJDAdapter.java
+END
+AreaAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/AreaAdapter.java
+END
+SecondAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/SecondAdapter.java
+END
+SelectPersonAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/adapter/SelectPersonAdapter.java
+END
+GwcbAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/adapter/GwcbAdapter.java
+END

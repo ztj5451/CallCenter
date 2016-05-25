@@ -1,0 +1,30 @@
+package com.callCenter.utils;
+
+import android.R.integer;
+
+public class HandlerException {
+	public static final int Success=0;
+	public static final int MalformedURLException=1;
+	public static final int IOException=2;
+	public static final int JSONException=3;
+	public static final int HttpURLConnection_not_HTTP_OK=4;
+	public static final int Fail=5;
+	public static final int NOUsername=6;
+	public static final int UserNameStop=7;
+	public static final int PassWordError=8;
+	public static final int ImeiOK=9;
+	public static final int ImeiFail=10;
+	public static final int TellAdmin=11;
+	public static final int AllSuccess=12;
+	public static final int SuccessToo=13;
+	public static final int Over=14;
+	public static final int ZbSuccess=15;
+	public static final int ZbError=16;
+	public static final int PdSuccess=17;
+	public static final int SelectPerson=18;
+	public static final int TdSuccess=19;
+	public static final int TdError=20;
+	public static final int CommitSuccess=21;
+	public static final int SuccessToo2=22;
+	public static final int NoResult=23;
+}

@@ -1,0 +1,254 @@
+package com.callCenter.activity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.callCenter.database.DBHelper;
+import com.callCenter.database.MessageDB;
+import com.callCenter.entity.Customer;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.SettingUtils;
+
+import android.app.Service;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Vibrator;
+import android.provider.SyncStateContract.Constants;
+import android.util.Log;
+
+/**
+ * 向服务器发送当前用户的在线状态
+ * 
+ * @author Administrator
+ * 
+ */
+public class GetListService extends Service {
+	public static List<Customer> customerList = null;
+	public static String url = "123";
+	private static final String TAG = "OnLineService";
+
+	private SettingUtils settingUtils;
+	private MediaPlayer player;
+	private DBHelper dbHelper;
+	private SQLiteDatabase database;
+	private String loginname = null, userId = null;
+	private Integer list_time = 0;
+	Timer timer = new Timer();
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 0:
+
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
+	public MyBinder myBinder = new MyBinder();
+
+	public class MyBinder extends Binder {
+		public GetListService getService() {
+			return GetListService.this;
+		}
+	}
+
+	// 绑定服务
+	@Override
+	public IBinder onBind(Intent intent) {
+		loginname = intent.getExtras().getString("loginname");
+		userId = intent.getExtras().getString("userId");
+		customerList = new ArrayList<Customer>();
+		settingUtils = new SettingUtils(GetListService.this);
+		list_time = Integer.parseInt(intent.getExtras().getString("list_time"));
+		timer.schedule(new ConnectiveTimerTask(), 5 * 1000, list_time);
+		Log.d(TAG, "onBind");
+		return myBinder;
+	}
+
+	// 服务启动
+	@Override
+	public void onCreate() {
+
+		Log.d(TAG, "onCreate");
+		super.onCreate();
+		dbHelper = new DBHelper(GetListService.this);
+		player = MediaPlayer.create(GetListService.this, R.raw.newblogtoast);
+
+	}
+
+	// 服务销毁
+	@Override
+	public void onDestroy() {
+		timer.cancel();
+		Log.d(TAG, "onDestory");
+		super.onDestroy();
+	}
+
+	// 内存低
+	@Override
+	public void onLowMemory() {
+		Log.d(TAG, "onLowMemory");
+		super.onLowMemory();
+	}
+
+	// 重新绑定
+	@Override
+	public void onRebind(Intent intent) {
+		Log.d(TAG, "onRebind");
+		super.onRebind(intent);
+	}
+
+	// 服务运行
+	@Override
+	public void onStart(Intent intent, int startId) {
+		Log.d(TAG, "onStart");
+		super.onStart(intent, startId);
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.d(TAG, "onStartCommand");
+		return super.onStartCommand(intent, flags, startId);
+	}
+
+	// 取消绑定
+	@Override
+	public boolean onUnbind(Intent intent) {
+		Log.d(TAG, "onUnbind");
+		timer.cancel();
+		return super.onUnbind(intent);
+	}
+
+	// 向服务器上传链接状态信息
+	private class ConnectiveTimerTask extends TimerTask {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			System.out.println("发送链接信号到服务器");
+			updateData();
+
+		}
+
+	}
+
+	// 获取最新列表
+	private void updateData() {
+		System.out.println(System.currentTimeMillis());
+		System.out.println("后台服务已经调用");
+
+		// getMessageList();
+		// getGwList();
+		getCallList();
+
+	}
+
+	// 通知url
+	private StringBuffer getCallListUrl() {
+		return new StringBuffer(SettingUtils.get("serverIp"))
+				.append(SettingUtils.get("callcenter_url")).append("uid=")
+				.append("d0d8bb1e-fe6c-4cf4-b919-cfdfb2563ba8");
+	}
+
+	// 获取通知的网络连接
+	private void getCallList() {
+		try {
+
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					getCallListUrl(), "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				JSONObject object = new JSONObject(message);
+				System.out.println(object.toString());
+				JSONArray array = object.getJSONArray("contents");
+				if (array.length() != 0) {
+					customerList.clear();
+					for (int i = 0; i < array.length(); i++) {
+						JSONObject obj = (JSONObject) array.get(i);
+
+						// 当呼叫为陌生人
+						if (obj.getString("kh_id").equals("")) {
+							Customer customer = new Customer();
+							customer.setId(obj.getString("id"));
+							customer.setTel(obj.getString("tel"));
+							customer.setFlag(obj.getString("flag"));
+							customer.setTimes(obj.getString("times"));
+							customer.setNum(obj.getString("num"));
+							customer.setKh_id(obj.getString("kh_id"));
+							customer.setName(obj.getString("kh_name"));
+							customerList.add(customer);
+
+						} else {
+							Customer customer = new Customer();
+							customer.setId(obj.getString("id"));
+							customer.setFlag(obj.getString("flag"));
+							customer.setTimes(obj.getString("times"));
+							customer.setNum(obj.getString("num"));
+							customer.setName(obj.getString("kh_name"));
+							customer.setAge(obj.getString("kh_age"));
+							customer.setSex(obj.getString("kh_sex"));
+							customer.setCardId(obj.getString("kh_cardid"));
+							customer.setDw(obj.getString("kh_dw"));
+							customer.setZy(obj.getString("kh_zy"));
+							customer.setAddress(obj.getString("kh_address"));
+							customer.setTel(obj.getString("kh_tel"));
+							customer.setJinjiTel(obj.getString("kh_jinji_tel"));
+							customer.setQq(obj.getString("kh_qq"));
+							customer.setJj(obj.getString("kh_jj"));
+							customer.setBz(obj.getString("kh_bz"));
+							customer.setSheng(obj.getString("sheng"));
+							customer.setShi(obj.getString("shi"));
+							customer.setQu(obj.getString("qu"));
+							customer.setJiedao(obj.getString("jiedao"));
+							customer.setSq(obj.getString("sq"));
+							customer.setZdy(obj.getString("zdy"));
+							customer.setJgou(obj.getString("jgou"));
+							customer.setGoutong(obj.getString("kh_goutong"));
+							customer.setJjlxr(obj.getString("jjlxr"));
+							customerList.add(customer);
+						}
+
+					}
+
+				}
+			}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}

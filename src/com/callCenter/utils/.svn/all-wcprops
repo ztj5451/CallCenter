@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils
+END
+JsonTool.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/JsonTool.java
+END
+SettingUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/SettingUtils.java
+END
+FileUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/FileUtils.java
+END
+CheckUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/utils/CheckUtils.java
+END
+MyUUID.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/MyUUID.java
+END
+BMapUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/BMapUtil.java
+END
+TimeUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/TimeUtils.java
+END
+RequestAndResultCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/RequestAndResultCode.java
+END
+HttpConnectUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/HttpConnectUtil.java
+END
+Md5Encrypt.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/Md5Encrypt.java
+END
+PhoneUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/PhoneUtils.java
+END
+UrlEncode.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/utils/UrlEncode.java
+END
+HandlerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/HandlerException.java
+END
+PushUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/PushUtils.java
+END
+EditTextTool.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/EditTextTool.java
+END
+CompressPicture.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/utils/CompressPicture.java
+END

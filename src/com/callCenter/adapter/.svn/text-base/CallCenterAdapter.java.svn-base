@@ -1,0 +1,91 @@
+package com.callCenter.adapter;
+
+import java.util.List;
+import com.callCenter.activity.R;
+import com.callCenter.entity.CallPhone;
+import com.callCenter.entity.Customer;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+/**
+ * 接收消息Adapter
+ * 
+ * @author Administrator
+ * 
+ */
+public class CallCenterAdapter extends BaseAdapter {
+	LayoutInflater inflater;
+	Context context;
+	List<Customer> customerList;
+
+	// 构造方法
+	public CallCenterAdapter(Context context, List<Customer> customerList) {
+		inflater = LayoutInflater.from(context);
+		this.customerList = customerList;
+		this.context = context;
+
+	}
+
+	@Override
+	public int getCount() {
+
+		return customerList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+
+		return customerList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parentGroup) {
+		ViewHolder viewHolder;
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.callcenter_item, null);
+			viewHolder = new ViewHolder();
+
+			viewHolder.phoneNumber = (TextView) convertView
+					.findViewById(R.id.phoneNumber);
+			viewHolder.callTime = (TextView) convertView
+					.findViewById(R.id.call_time);
+
+			viewHolder.newCall = (TextView) convertView
+					.findViewById(R.id.new_call);
+
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+
+		}
+
+		viewHolder.phoneNumber
+				.setText(customerList.get(position).getName());
+		viewHolder.callTime.setText(customerList.get(position).getTimes());
+
+		if (customerList.get(position).getFlag().equals("0")) {
+			viewHolder.newCall.setVisibility(View.GONE);
+		}
+		return convertView;
+	}
+
+	/**
+	 * 存放控件
+	 */
+	public final class ViewHolder {
+		public TextView phoneNumber, callTime, newCall;
+
+	}
+
+}

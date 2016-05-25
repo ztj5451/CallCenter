@@ -1,0 +1,226 @@
+package com.callCenter.activity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import com.callCenter.adapter.CallCenterAdapter;
+import com.callCenter.entity.CallPhone;
+import com.callCenter.entity.Customer;
+import com.callCenter.utils.PhoneUtils;
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class CallCenterActivity extends Activity {
+	private List<Customer> myCustomerList;
+	private List<CallPhone> phoneList;
+	private CallCenterAdapter adapter = null;
+	private ListView callListView;
+	private boolean isBand = false;
+	private String loginname,userId;
+	// 获取列表服务
+	private GetListService getListService;
+	private Intent serviceIntent;
+	private static final String TAG = "OnLineService";
+	private Timer timer = new Timer();
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 0:
+
+				if (adapter != null) {
+					callListView.setAdapter(adapter);
+					adapter.notifyDataSetChanged();
+				} else {
+					adapter = new CallCenterAdapter(CallCenterActivity.this,
+							myCustomerList);
+					callListView.setAdapter(adapter);
+					adapter.notifyDataSetChanged();
+				}
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.callcenter);
+		init();
+		Event();
+		new Thread() {
+			public void run() {
+				
+				timer.schedule(new ConnectiveTimerTask(), 10 * 1000, 10 * 1000);
+			};
+		}.start();
+
+	}
+
+	private class ConnectiveTimerTask extends TimerTask {
+		@Override
+		public void run() {
+			System.out.println("获取list集合中的内容");
+			myCustomerList = GetListService.customerList;
+			System.out.println("获取list集合中的大小:"+myCustomerList.size());
+			if (myCustomerList.size() != 0) {
+				handler.sendEmptyMessage(0);
+			}
+
+		}
+
+	}
+
+	@Override
+	protected void onResume() {
+		startConnectionService();
+		super.onResume();
+	}
+
+	// 初始化
+	private void init() {
+		//获取坐席人员的userId
+		userId=getIntent().getExtras().getString("userId");
+		//获取坐席人员的登录name
+		loginname = getIntent().getExtras().getString("loginname");
+		callListView = (ListView) this.findViewById(R.id.call_list);
+		// phoneList = new ArrayList<CallPhone>();
+		// CallPhone phone = new CallPhone();
+		// phone.setPhoneNumber("13578918907");
+		// phone.setDateTime("2014-06-01 16:18");
+		// phoneList.add(phone);
+		// adapter = new CallCenterAdapter(CallCenterActivity.this, phoneList);
+		// callListView.setAdapter(adapter);
+		// adapter.notifyDataSetChanged();
+
+	}
+
+	// 按钮事件
+	private void Event() {
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View view) {
+						CallCenterActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+
+					}
+				});
+		// listview 点击事件
+		callListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				System.out.println("打印："+myCustomerList.get(position).getName());;
+				Intent intent = new Intent(CallCenterActivity.this,
+						CallerDetailActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putSerializable("customer",  (Serializable)myCustomerList.get(position));
+				intent.putExtras(bundle);
+				startActivity(intent);
+				overridePendingTransition(R.anim.in_from_right,
+						R.anim.out_to_left);
+				
+
+			}
+		});
+
+	}
+
+	// 绑定的服务
+	// 开启联接状态信号服务
+	private void startConnectionService() {
+		serviceIntent = new Intent(CallCenterActivity.this,
+				GetListService.class);
+		serviceIntent.putExtra("loginname", loginname);
+		serviceIntent.putExtra("userId", userId);
+
+		serviceIntent.putExtra("list_time", "10000");
+		// 对服务进行绑定
+		isBand = bindService(serviceIntent, serviceConnection,
+				Context.BIND_AUTO_CREATE);
+		System.out.println("开始绑定");
+
+	}
+
+	//
+	private ServiceConnection serviceConnection = new ServiceConnection() {
+		// 绑定成功调用此方法
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			// TODO Auto-generated method stub
+			getListService = ((GetListService.MyBinder) service).getService();
+			System.out.println("服务绑定成功");
+		}
+
+		// 解除绑定调用此方法
+		public void onServiceDisconnected(ComponentName name) {
+			// TODO Auto-generated method stub
+			getListService = null;
+			System.out.println("取消绑定");
+		}
+
+	};
+
+	// 绑定服务
+	@Override
+	public boolean bindService(Intent service, ServiceConnection conn, int flags) {
+		super.bindService(service, conn, flags);
+		System.out.println("服务绑定成功");
+		return true;
+	};
+
+	// 解除绑定
+	@Override
+	public void unbindService(ServiceConnection conn) {
+		if (isBand) {
+			super.unbindService(conn);
+
+			System.out.println("取消绑定");
+			isBand = false;
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		timer.cancel();
+		unbindService(serviceConnection);
+		super.onDestroy();
+	}
+
+	// 返回键
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			CallCenterActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

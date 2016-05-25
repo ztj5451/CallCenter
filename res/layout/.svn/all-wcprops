@@ -1,0 +1,443 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout
+END
+alert_dialog_menu_list_layout_special.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/alert_dialog_menu_list_layout_special.xml
+END
+work_order.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/work_order.xml
+END
+callcenter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/callcenter.xml
+END
+caller_detail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/caller_detail.xml
+END
+recharge.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/recharge.xml
+END
+recharge_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/recharge_item.xml
+END
+gwcb_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwcb_item.xml
+END
+map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/map.xml
+END
+qy_details_info.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/qy_details_info.xml
+END
+webalert.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/webalert.xml
+END
+gwpf_detail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/gwpf_detail.xml
+END
+gd_finish.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/gd_finish.xml
+END
+first_list_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/first_list_item.xml
+END
+gwpf2_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/gwpf2_item.xml
+END
+server_person_jd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/server_person_jd.xml
+END
+qzcl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/qzcl.xml
+END
+about.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/about.xml
+END
+select_media_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/select_media_item.xml
+END
+alert_dialog.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/alert_dialog.xml
+END
+sourround_map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/sourround_map.xml
+END
+gwsp.xml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwsp.xml
+END
+gwcb.xml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwcb.xml
+END
+gwsp_detail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/gwsp_detail.xml
+END
+gwpf_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwpf_item.xml
+END
+back_btn.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/back_btn.xml
+END
+txl_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/txl_item.xml
+END
+select_map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/select_map.xml
+END
+select_txl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/select_txl.xml
+END
+detail_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/detail_item.xml
+END
+gwstart_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwstart_item.xml
+END
+loadprogress.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/loadprogress.xml
+END
+server_person_jd_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/server_person_jd_item.xml
+END
+login.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/login.xml
+END
+main.xml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/main.xml
+END
+recharge_detail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/recharge_detail.xml
+END
+gwdone.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwdone.xml
+END
+gwgz_detail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwgz_detail.xml
+END
+alert_dialog_menu_list_layout_cancel.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/alert_dialog_menu_list_layout_cancel.xml
+END
+receive_message.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/receive_message.xml
+END
+ddgwsl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/ddgwsl.xml
+END
+sendmessage_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/sendmessage_item.xml
+END
+custom_text_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/custom_text_view.xml
+END
+qyinfo_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/qyinfo_item.xml
+END
+txl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/txl.xml
+END
+gwstart.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/gwstart.xml
+END
+mysourround_qymap.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/mysourround_qymap.xml
+END
+systemsetting.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/systemsetting.xml
+END
+surroundqy.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/surroundqy.xml
+END
+callcenter_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/callcenter_item.xml
+END
+jd_detail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/jd_detail.xml
+END
+alert_dialog_menu_list_layout.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/alert_dialog_menu_list_layout.xml
+END
+pd_person_select.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/pd_person_select.xml
+END
+alert_dialog_menu_list_layout_title.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/alert_dialog_menu_list_layout_title.xml
+END
+formap_qy_details_info.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/formap_qy_details_info.xml
+END
+message.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/message.xml
+END
+surround_qy_map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/surround_qy_map.xml
+END
+qyinfo.xml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/qyinfo.xml
+END
+person_info.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/person_info.xml
+END
+data_acquisition.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/data_acquisition.xml
+END
+second_list_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/second_list_item.xml
+END
+sendmessage.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/sendmessage.xml
+END
+receivemessage_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/receivemessage_item.xml
+END
+work_order_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/work_order_item.xml
+END
+area_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/area_item.xml
+END
+gwgz_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwgz_item.xml
+END
+picture_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/picture_item.xml
+END
+qy_detail_map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/qy_detail_map.xml
+END
+select_person_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/CallCenter/!svn/ver/3/CallCenter/res/layout/select_person_item.xml
+END
+alert_dialog_menu_layout.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/alert_dialog_menu_layout.xml
+END
+gwfj_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwfj_item.xml
+END
+gwhandler.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwhandler.xml
+END
+gwsp_item.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/gwsp_item.xml
+END
+select_area.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/CallCenter/!svn/ver/2/CallCenter/res/layout/select_area.xml
+END

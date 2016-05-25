@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="bluetooth">bluetooth</string>
+    <string name="usb">USB</string>
+    <string name="ethernet">ethernet</string>
+    <string name="print_mode">Print mode</string>
+    <string name="tsc">Label</string>
+    <string name="esc">Receipt</string>
+    <string name="print_text">Print text</string>
+    <string name="print_image">Print bitmap</string>
+    <string name="print_1d_barcode">Print 1D barcode</string>
+    <string name="open">Open port</string>
+    <string name="close">Close port</string>
+    <string name="receive">Received data</string>
+    <string name="query">Query status</string>
+    <string name="init_port_info">Port:undefined Addr:undefined</string>
+    <string name="port">Port:</string>
+    <string name="ok">OK</string>  
+    <string name="address">Addr:</string>
+    <string name="port_parameters_wrong">Invalid parameters！</string>
+    <string name="port_parameters_is_not_save">Port parameters is not saved！</string>
+    <string name="gprinter001">Printer 001</string>
+    <string name="gprinter002">Printer 002</string>
+    <string name="gprinter003">Printer 003</string>
+	<string name="gprinter004">Printer 004</string>
+	<string name="gprinter005">Printer 005</string>
+    <string name="disconnect">disconnect</string>
+    <string name="cut">disconn</string>
+    <string name="cutting">disconnecting</string>
+    <string name="connect">connect</string>
+     <string name="connected">connected</string>
+    <string name="connecting">connecting</string>
+    <string name="port_configuration">Port configuration</string>
+    <string name ="bluetooth_is_not_enabled">bluetooth is not enabled</string>
+    <string name = "title_paired_devices">Paired</string>
+    <string name ="title_other_devices">New</string>
+    <string name ="scan">Scan</string>
+     <string name ="bluetooth_device_list">Bluetooth device list</string>
+    <string name ="select_bluetooth_device">select bluetooth device</string>
+    <string name ="none_bluetooth_device_found">none bluetooth device found</string>
+    <string name ="none_paired">none paired</string>
+    <string name ="refresh_bluetooth_list">refresh bluetooth list</string>
+    <string name ="scaning">scaning</string>
+    <string name ="usb_info">usb information</string>
+    <string name ="refresh_usb_device">refresh usb devices</string>
+    <string name ="ip_address">ip:</string>
+    <string name ="default_ip_address">192.168.123.100</string>
+     <string name ="port_number">port:</string>
+    <string name ="default_port_number">9100</string>   
+    <string name ="bluetooth_address">bluetooth addr： </string>
+    <string name ="usb_address">USB： </string>
+    <string name ="usb_devices_list">USB devices list</string>
+    <string name ="none_usb_device">none usb device connected</string>
+    <string name="current_version">current version</string>
+    <string name="find_new_version">Found new version</string>
+    <string name="whether_or_not_to_update">Update app？</string>
+    <string name="app_update">App update</string>
+    <string name="update">update</string>
+    <string name="not_update">ignore</string>
+    <string name="downloading">Downloading</string>
+    <string name="please_wait">please waiting</string>
+    <string name="download_complated">downloaded</string>
+    <string name="whether_or_not_setup_new_app">Setup new app?</string>
+    <string name="loading">Loading。。。</string>
+    <string name="cancel">Cancel</string>
+	<string name="copy_right_en">COPYRIGHT@2014 GPRINTER ALL RIGHTS RESERVERD</string>
+	<string name="copy_right_cn">佳博集团 版权所有</string> 
+    <!-- 应用程序中所需要用到的文字信息 -->
+    <string name="app_name">精诚服务</string>
+    <!-- 登陆页面 -->
+    <string name="user_name">账号：</string>
+    <string name="user_password">密码：</string>
+    <string name="hint_username"> 请输入用户编号</string>
+    <string name="hint_password"> 请输入用户密码</string>
+    <string name="login_btn">登 录</string>
+    <string name="exit_btn">退 出</string>
+    <string name="rem_username">记住账号</string>
+    <string name="rem_userpassword">记住密码</string>
+    <string name="username_empty">登陆账号不能为空!</string>
+    <string name="password_empty">登陆密码不能为空!</string>
+    <string name="login_tip">温馨提示</string>
+    <string name="login_tip_message">是否要绑定当前手机?</string>
+    <!-- 个人信息 -->
+    <string name="personInfo">个人信息</string>
+    <!-- 退出 -->
+    <string name="app_ok">确  定</string>
+    <string name="app_cancel">取  消</string>
+    <string name="tip_message">您确定要退出该程序吗?</string>
+    <string name="tip_message2">你确定要删除此目录下的文件吗?</string>
+    <string name="backToo">再次返回退出当前应用程序！</string>
+    <string name="system_exit">当前系统操作</string>
+    <string name="tip">提  示</string>
+    <!-- 头部 -->
+    <string name="user_kq_no">GPS 定位开关(关)</string>
+    <string name="user_kq">GPS 定位开关(开)</string>
+    <string name="u_name">张三</string>
+    <string name="u_bm">财务部</string>
+    <string name="u_zw">会计</string>
+    <string name="bar_back">返回</string>
+    <string name="changeMap">切换</string>
+    <string name="edit">编辑</string>
+    <!-- 考勤签到 -->
+    <string name="kqqd_menu">定位开关</string>
+    <string name="map">地图展示</string>
+    <string name="qy_details_info">企业详细信息</string>
+    <string name="gwstart">客服派单</string>
+    <string name="gwhandler">工单派发</string>
+    <string name="gwdone">工单跟踪</string>
+    <string name="gwfj">公文附件</string>
+    <string name="zbqy">周边客户</string>
+    <string name="qyinfo">企业信息</string>
+    <string name="sendmessage">发送通知</string>
+    <string name="sendMessage">发送</string>
+    <string name="messageSelect">请选择接收人</string>
+    <string name="sendToMobile">是否发送手机通知</string>
+    <string name="receiver"> 接  单  部  门 </string>
+    <string name="messageTitle">请输入发送通知标题</string>
+    <string name="messageContent">请输入发送通知内容</string>
+    <string name="sendList">当前没有发送通知的记录!</string>
+    <string name="sendMessageSuccess">通知发送成功！</string>
+    <string name="sendMessageFail">通知发送失败！</string>
+    <string name="messageDetail">通知详细</string>
+    <string name="txl">通讯录</string>
+    <string name="zxPerson">坐   席</string>
+    <string name="message">公告详细</string>
+    <string name="send_time">发送时间:</string>
+    <string name="call_time">呼入时间:</string>
+    <string name="send_bm">发送部门:</string>
+    <string name="myLocation">我的位置</string>
+    <string name="surroundLocation">周边企业位置</string>
+    <string name="qyLocation">企业所在位置</string>
+    <!-- 数据采集 -->
+    <string name="dataAcquisition">数据采集</string>
+    <!-- 公文 -->
+    <string name="gw_start">派  发</string>
+    <string name="add_attachment">添  加  附  件</string>
+    <string name="attachment_list">附  件  列  表</string>
+    <string name="gw_select">请选择接收单位</string>
+    <string name="gw_title">请输入备注信息</string>
+    <string name="gw_content">请输入服务简介</string>
+    <string name="gwStart_empty">当前没有已发起的公文</string>
+    <string name="gwWaiting_empty">当前没有要办理的公文</string>
+    <string name="delete_gw"> 删 除 </string>
+    <string name="gw_handle_yx">审批意向：</string>
+    <string name="handle">办  理</string>
+    <string name="handle_yj">请输入办理意见</string>
+    <string name="toBig">上传附件过大!</string>
+    <!-- 系统设置 -->
+    <string name="system_set">系统设置</string>
+    <string name="newPwd">新密码不能为空！</string>
+    <string name="confirmPwd">确认密码不能为空！</string>
+    <string name="pwdneq">新密码与确认密码不相同!</string>
+    <string name="newPass">新    密    码：</string>
+    <string name="oldPass">原    密    码：</string>
+    <string name="confirmPass">确认密码：</string>
+    <string name="newPassHint">请输入新密码</string>
+    <string name="confirmPassHint">请输入确认密码</string>
+    <string name="oldPassHint">请输入原密码</string>
+    <string name="oldPwd">原密码不能为空!</string>
+    <string name="changePass">修  改  密  码</string>
+    <string name="change">修  改</string>
+    <string name="update_software">软  件  更  新</string>
+	<string name="idCard_from">图  片 来 源</string>
+    <!-- 关于 -->
+    <string name="about">关于</string>
+    <string name="company_name">长春市残联协会</string>
+    <string name="tel_call">电话咨询</string>
+    <string name="pro2me">问题反馈</string>
+    <string name="banquan">长春市残联协会  | 版权所有</string>
+    <!-- 弹出菜单 -->
+    <string-array name="kaoqin_item_no">
+        <item>开   启</item>
+    </string-array>
+    <string-array name="kaoqin_item_yes">
+        <item>关   闭</item>
+    </string-array>
+    <string-array name="system_item">
+        <item>注 销 用 户</item>
+        <item>退 出 系 统</item>
+    </string-array>
+
+    <string name="sendMessage_manager">通 知 公 告 管 理</string>
+
+    <string-array name="message_del_all">
+        <item>全  部  清  空</item>
+    </string-array>
+
+    <string name="gwStart_manager">已  发  公  文  管  理</string>
+
+    <string-array name="gwStart_del">
+        <item>全  部  清  空</item>
+    </string-array>
+
+    <string name="select_attachment">上  传  附  件  管  理</string>
+
+    <string-array name="attachment_item">
+        <item>照  相  机</item>
+        <item>图  片  库</item>
+        <!-- <item>本  地  存  储  卡</item> -->
+    </string-array>
+    <string-array name="state">
+        <item>--请选择--</item>
+        <item>未受理</item>
+        <item>已受理</item>
+        <item>服务完成</item>
+    </string-array>
+    <string-array name="isTd">
+        <item>--请选择--</item>
+        <item>否</item>
+        <item>是</item>
+    </string-array>
+    <string-array name="state2">
+        <item>--请选择--</item>
+        <item>未完成</item>
+        <item>已完成</item>
+    </string-array>
+    <string-array name="goutong">
+        <item>--请选择--</item>
+        <item>困难</item>
+        <item>较难</item>
+        <item>一般</item>
+        <item>容易</item>
+        <item>非常容易</item>
+    </string-array>
+    <string-array name="sex">
+        <item >--请选择--</item>
+        <item>先生</item>
+        <item>女士</item>
+    </string-array>
+  <string-array name="select_idCard">
+        <item>相 机 拍 摄</item>
+        <item>图 库 选 择</item>
+    </string-array>
+</resources>

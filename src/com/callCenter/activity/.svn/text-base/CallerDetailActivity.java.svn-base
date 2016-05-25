@@ -1,0 +1,613 @@
+package com.callCenter.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.callCenter.entity.Customer;
+import com.callCenter.entity.Type;
+import com.callCenter.utils.HandlerException;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.RequestAndResultCode;
+import com.callCenter.utils.SettingUtils;
+import com.callCenter.utils.UrlEncode;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+public class CallerDetailActivity extends Activity {
+	private double lat = 0.0, lng = 0.0;
+	private Button editButton;
+	private boolean isEdit = false;
+	private EditText name, age, sex, cardId, dw, address, tel, jinji_tel, qq,
+			jj, bz, sheng, shi, zy, qu, jiedao, sq, zdy, jgou, goutong, jjlxr;
+	private Customer customer;
+	private SettingUtils settingUtils;
+	private Spinner category, shengSp;
+	private ArrayAdapter<String> categoryAdapter;
+	private String[] spinner;
+	private String areaId = "0";
+	private boolean isSheng = false, isShi = false, isQu = false;
+	private String shengId = "", shiId = "", quId = "", jiedaoId = "",
+			shequId = "";
+	private List<Type> typeList;
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case HandlerException.Success:
+				if (typeList != null) {
+					spinner = new String[typeList.size()];
+					for (int i = 0; i < typeList.size(); i++) {
+						spinner[i] = typeList.get(i).getName();
+					}
+				}
+				// spinner = new String[] { "选择类别", "普通", "紧急", "非常紧急" };
+				categoryAdapter = new ArrayAdapter<String>(
+						CallerDetailActivity.this,
+						android.R.layout.simple_spinner_item, spinner);
+				categoryAdapter
+						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				category.setAdapter(categoryAdapter);
+				category.setSelection(0, false);
+
+				break;
+			case HandlerException.HttpURLConnection_not_HTTP_OK:
+				break;
+			case HandlerException.IOException:
+				break;
+			case HandlerException.Fail:
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.caller_detail);
+		init();
+		findById();
+		setValue();
+		Event();
+
+	}
+
+	private void init() {
+		settingUtils = new SettingUtils(CallerDetailActivity.this);
+		customer = (Customer) getIntent().getSerializableExtra("customer");
+		// System.out.println("传递过来的对象:" + customer.getName());
+		// 从网络上获取选项
+		new Thread() {
+			public void run() {
+				typeList = typeAction(typeUrl());
+			};
+		}.start();
+
+	}
+
+	private void Event() {
+		// 处理事件类别
+
+		category.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				String temp = spinner[position];
+				String tempId = typeList.get(position).getId();
+				Toast.makeText(CallerDetailActivity.this, temp + "," + tempId,
+						Toast.LENGTH_LONG).show();
+
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		// 选择省
+		this.findViewById(R.id.shengBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						Intent intent = new Intent(CallerDetailActivity.this,
+								SelectAreaActivity.class);
+						intent.putExtra("id", "0");
+						intent.putExtra("url", "selectSheng.jsp");
+						startActivityForResult(intent,
+								RequestAndResultCode.SELECT_SHENG);
+						isSheng = true;
+
+					}
+				});
+		// 选择市
+		this.findViewById(R.id.shiBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						if (!areaId.equals("0")) {
+							Intent intent = new Intent(
+									CallerDetailActivity.this,
+									SelectAreaActivity.class);
+							intent.putExtra("id", areaId);
+							intent.putExtra("url", "selectShi.jsp");
+							startActivityForResult(intent,
+									RequestAndResultCode.SELECT_SHENG);
+							isShi = true;
+						}
+
+					}
+				});
+		// 选择区
+		this.findViewById(R.id.quBtn).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (!areaId.equals("0")) {
+					Intent intent = new Intent(CallerDetailActivity.this,
+							SelectAreaActivity.class);
+					intent.putExtra("id", areaId);
+					intent.putExtra("url", "selectQu.jsp");
+					startActivityForResult(intent,
+							RequestAndResultCode.SELECT_SHENG);
+					isQu = true;
+				}
+
+			}
+		});
+		// 街道
+		this.findViewById(R.id.jiedaoBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						if (!areaId.equals("0")) {
+							Intent intent = new Intent(
+									CallerDetailActivity.this,
+									SelectAreaActivity.class);
+							intent.putExtra("id", areaId);
+							intent.putExtra("url", "selectJieDao.jsp");
+							startActivityForResult(intent,
+									RequestAndResultCode.SELECT_SHENG);
+						}
+					}
+				});
+		// 社区
+		this.findViewById(R.id.sqBtn).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (!areaId.equals("0")) {
+					Intent intent = new Intent(CallerDetailActivity.this,
+							SelectAreaActivity.class);
+					intent.putExtra("id", areaId);
+					intent.putExtra("url", "selectSheQu.jsp");
+					startActivityForResult(intent,
+							RequestAndResultCode.SELECT_SHENG);
+				}
+
+			}
+		});
+		// 取消
+		this.findViewById(R.id.cancel).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						CallerDetailActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+
+					}
+				});
+		// 提交到服务器
+		this.findViewById(R.id.commit).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						new Thread() {
+							public void run() {
+								// 保存
+								saveAction(saveUrl());
+							};
+						}.start();
+					}
+				});
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						CallerDetailActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+
+					}
+				});
+
+		this.findViewById(R.id.toMap).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(CallerDetailActivity.this,
+						SelectMapActivity.class);
+				startActivityForResult(intent, RequestAndResultCode.SELECT_MAP);
+
+			}
+		});
+
+		// 编辑客户信息
+		this.findViewById(R.id.editCustomer).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						if (!isEdit) {
+							editButton.setText("提交");
+							name.setEnabled(true);
+							age.setEnabled(true);
+							sex.setEnabled(true);
+							cardId.setEnabled(true);
+							dw.setEnabled(true);
+							address.setEnabled(true);
+							tel.setEnabled(true);
+							jinji_tel.setEnabled(true);
+							qq.setEnabled(true);
+							jj.setEnabled(true);
+							bz.setEnabled(true);
+							sheng.setEnabled(true);
+							shi.setEnabled(true);
+							qu.setEnabled(true);
+							jiedao.setEnabled(true);
+							sq.setEnabled(true);
+							zdy.setEnabled(true);
+							jgou.setEnabled(true);
+							goutong.setEnabled(true);
+							jjlxr.setEnabled(true);
+							zy.setEnabled(true);
+							isEdit = true;
+							name.setBackgroundResource(R.drawable.mm_edit_focused);
+							age.setBackgroundResource(R.drawable.mm_edit_focused);
+							sex.setBackgroundResource(R.drawable.mm_edit_focused);
+							cardId.setBackgroundResource(R.drawable.mm_edit_focused);
+							dw.setBackgroundResource(R.drawable.mm_edit_focused);
+							address.setBackgroundResource(R.drawable.mm_edit_focused);
+							tel.setBackgroundResource(R.drawable.mm_edit_focused);
+							jinji_tel
+									.setBackgroundResource(R.drawable.mm_edit_focused);
+							qq.setBackgroundResource(R.drawable.mm_edit_focused);
+							jj.setBackgroundResource(R.drawable.mm_edit_focused);
+							bz.setBackgroundResource(R.drawable.mm_edit_focused);
+							sheng.setBackgroundResource(R.drawable.mm_edit_focused);
+							shi.setBackgroundResource(R.drawable.mm_edit_focused);
+							qu.setBackgroundResource(R.drawable.mm_edit_focused);
+							jiedao.setBackgroundResource(R.drawable.mm_edit_focused);
+							sq.setBackgroundResource(R.drawable.mm_edit_focused);
+							zdy.setBackgroundResource(R.drawable.mm_edit_focused);
+							jgou.setBackgroundResource(R.drawable.mm_edit_focused);
+							goutong.setBackgroundResource(R.drawable.mm_edit_focused);
+							jjlxr.setBackgroundResource(R.drawable.mm_edit_focused);
+							zy.setBackgroundResource(R.drawable.mm_edit_focused);
+
+						} else {
+							editButton.setText("编辑");
+							name.setEnabled(false);
+							age.setEnabled(false);
+							sex.setEnabled(false);
+							cardId.setEnabled(false);
+							dw.setEnabled(false);
+							address.setEnabled(false);
+							tel.setEnabled(false);
+							jinji_tel.setEnabled(false);
+							qq.setEnabled(false);
+							jj.setEnabled(false);
+							bz.setEnabled(false);
+							sheng.setEnabled(false);
+							shi.setEnabled(false);
+							qu.setEnabled(false);
+							jiedao.setEnabled(false);
+							sq.setEnabled(false);
+							zdy.setEnabled(false);
+							jgou.setEnabled(false);
+							goutong.setEnabled(false);
+							jjlxr.setEnabled(false);
+							zy.setEnabled(false);
+							name.setBackgroundResource(R.drawable.back);
+							age.setBackgroundResource(R.drawable.back);
+							sex.setBackgroundResource(R.drawable.back);
+							cardId.setBackgroundResource(R.drawable.back);
+							dw.setBackgroundResource(R.drawable.back);
+							address.setBackgroundResource(R.drawable.back);
+							tel.setBackgroundResource(R.drawable.back);
+							jinji_tel.setBackgroundResource(R.drawable.back);
+							qq.setBackgroundResource(R.drawable.back);
+							jj.setBackgroundResource(R.drawable.back);
+							bz.setBackgroundResource(R.drawable.back);
+							sheng.setBackgroundResource(R.drawable.back);
+							shi.setBackgroundResource(R.drawable.back);
+							qu.setBackgroundResource(R.drawable.back);
+							jiedao.setBackgroundResource(R.drawable.back);
+							sq.setBackgroundResource(R.drawable.back);
+							zdy.setBackgroundResource(R.drawable.back);
+							jgou.setBackgroundResource(R.drawable.back);
+							goutong.setBackgroundResource(R.drawable.back);
+							jjlxr.setBackgroundResource(R.drawable.back);
+							zy.setBackgroundResource(R.drawable.back);
+							isEdit = false;
+						}
+
+					}
+				});
+	}
+
+	// 找到组件
+	private void findById() {
+		editButton = (Button) this.findViewById(R.id.editCustomer);
+		name = (EditText) this.findViewById(R.id.name);
+		age = (EditText) this.findViewById(R.id.age);
+		sex = (EditText) this.findViewById(R.id.personSex);
+		cardId = (EditText) this.findViewById(R.id.cardId);
+		dw = (EditText) this.findViewById(R.id.dw);
+		address = (EditText) this.findViewById(R.id.address);
+		tel = (EditText) this.findViewById(R.id.tel);
+		jinji_tel = (EditText) this.findViewById(R.id.jinji_tel);
+		qq = (EditText) this.findViewById(R.id.qq);
+		jj = (EditText) this.findViewById(R.id.jj);
+		bz = (EditText) this.findViewById(R.id.bz);
+		sheng = (EditText) this.findViewById(R.id.sheng);
+		shi = (EditText) this.findViewById(R.id.shi);
+		qu = (EditText) this.findViewById(R.id.qu);
+		jiedao = (EditText) this.findViewById(R.id.jiedao);
+		sq = (EditText) this.findViewById(R.id.sq);
+		zdy = (EditText) this.findViewById(R.id.zdy);
+		jgou = (EditText) this.findViewById(R.id.jgou);
+		goutong = (EditText) this.findViewById(R.id.goutong);
+		jjlxr = (EditText) this.findViewById(R.id.jjlxr);
+		zy = (EditText) this.findViewById(R.id.zy);
+		category = (Spinner) this.findViewById(R.id.category);
+		// shengSp=(Spinner) this.findViewById(R.id.shengSp);
+
+	}
+
+	// 赋予值
+	private void setValue() {
+		name.setText(customer.getName());
+		age.setText(customer.getAge());
+		sex.setText(customer.getSex());
+		cardId.setText(customer.getCardId());
+		dw.setText(customer.getDw());
+		address.setText(customer.getAddress());
+		tel.setText(customer.getTel());
+		jinji_tel.setText(customer.getJinjiTel());
+		qq.setText(customer.getQq());
+		jj.setText(customer.getJj());
+		bz.setText(customer.getBz());
+		sheng.setText(customer.getSheng());
+		shi.setText(customer.getShi());
+		qu.setText(customer.getQu());
+		jiedao.setText(customer.getJiedao());
+		sq.setText(customer.getSq());
+		zdy.setText(customer.getZdy());
+		jgou.setText(customer.getJgou());
+		goutong.setText(customer.getGoutong());
+		jjlxr.setText(customer.getJjlxr());
+		zy.setText(customer.getZy());
+	}
+
+	// 保存url
+	private StringBuffer saveUrl() {
+		// StringBuffer saveUrl = new
+		// StringBuffer(SettingUtils.get("serverIp"));
+		StringBuffer saveUrl = new StringBuffer("http://192.168.1.210:8188");
+		// 判断是客户还是陌生人
+		if (customer.getKh_id().equals("")) {
+			saveUrl.append(SettingUtils.get("kefu_url")).append("&qubie=")
+					.append("0").append("&kehuid=").append("");
+		} else {
+			saveUrl.append(SettingUtils.get("kefu_url")).append("&qubie=")
+					.append("1").append("&kehuid=").append(customer.getKh_id());
+		}
+		//判断是否选择了地理位置
+		if (lat == 0.0 || lng == 0.0) {
+			saveUrl.append("&jwd=");
+		} else {
+			saveUrl.append("&jwd=1").append("&lat=").append(lat)
+					.append("&lng=").append(lng);
+		}
+		try {
+			saveUrl.append("&sheng=")
+					.append(shengId)
+					.append("&shi=")
+					.append(shiId)
+					.append("&qu=")
+					.append(quId)
+					.append("&jiedao=")
+					.append(jiedaoId)
+					.append("&zdy=")
+					.append("")
+					.append("&jg=")
+					.append("")
+					.append("&kh_tel=")
+					.append(tel.getText().toString().trim())
+					.append("&kh_name=")
+					.append(UrlEncode.Encode(name.getText().toString().trim()))
+					.append("&kh_cardid=")
+					.append(cardId.getText().toString().trim())
+					.append("&hyd=")
+					.append("")
+					.append("&kh_goutong=")
+					.append(UrlEncode.Encode(goutong.getText().toString()
+							.trim()))
+					.append("&kh_sex=")
+					.append(UrlEncode.Encode(sex.getText().toString().trim()))
+					.append("&kh_age=")
+					.append(age.getText().toString().trim())
+					.append("&kh_sx=")
+					.append("")
+					.append("&kh_dw=")
+					.append(UrlEncode.Encode(dw.getText().toString().trim()))
+					.append("&kh_zy=")
+					.append(UrlEncode.Encode(zy.getText().toString().trim()))
+					.append("&kh_address=")
+					.append(UrlEncode.Encode(address.getText().toString()
+							.trim()))
+					.append("&jjlxr=")
+					.append(UrlEncode.Encode(jjlxr.getText().toString().trim()))
+					.append("&kh_jinji_tel=")
+					.append(jinji_tel.getText().toString()).append("&kh_qq=")
+					.append(UrlEncode.Encode(qq.getText().toString().trim()))
+					.append("&email=").append("").append("&kh_jj=")
+					.append(UrlEncode.Encode(jj.getText().toString().trim()))
+					.append("&kh_bz=")
+					.append(UrlEncode.Encode(bz.getText().toString().trim()));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println("提交的url" + saveUrl);
+		return saveUrl;
+
+	}
+
+	// 保存提交的数据
+	private void saveAction(StringBuffer saveUrl) {
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					saveUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				System.out.println("返回的信息 :"+message);
+				if (message.equals("")) {
+					handler.sendEmptyMessage(HandlerException.Success);
+				} else {
+					handler.sendEmptyMessage(HandlerException.Fail);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.IOException);
+		}
+	}
+
+	// 获取类别url
+	private StringBuffer typeUrl() {
+		// StringBuffer typeUrl = new
+		// StringBuffer(SettingUtils.get("serverIp"));
+		StringBuffer typeUrl = new StringBuffer("http://192.168.1.210:8188");
+		typeUrl.append(SettingUtils.get("type_url"));
+		System.out.println("获取类别URL：" + typeUrl);
+		return typeUrl;
+	}
+
+	private List<Type> typeAction(StringBuffer typeUrl) {
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					typeUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				JSONObject object = new JSONObject(message);
+				JSONArray array = new JSONArray(object.getString("indo"));
+				if (array.length() != 0) {
+					typeList = new ArrayList<Type>();
+					for (int i = 0; i < array.length(); i++) {
+
+						JSONObject obj = array.getJSONObject(i);
+						if (!obj.getString("id").equals("0")) {
+							Type type = new Type();
+							type.setId(obj.getString("id"));
+							type.setName(obj.getString("name"));
+							typeList.add(type);
+						}
+
+					}
+					handler.sendEmptyMessage(HandlerException.Success);
+					return typeList;
+				} else {
+					handler.sendEmptyMessage(HandlerException.Fail);
+					return null;
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.IOException);
+
+		}
+		return null;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		try {
+			if (requestCode == RequestAndResultCode.SELECT_SHENG) {
+				String name = data.getExtras().getString("name");
+				areaId = data.getExtras().getString("areaId");
+				if (isSheng) {
+					sheng.setText(name);
+					shengId = areaId;
+					isSheng = false;
+				} else if (isShi) {
+					shiId = areaId;
+					shi.setText(name);
+					isShi = false;
+				} else if (isQu) {
+					quId = areaId;
+					qu.setText(name);
+					isQu = false;
+				}
+
+			} else if (requestCode == RequestAndResultCode.SELECT_MAP) {
+				lat = data.getExtras().getDouble("lat");
+				lng = data.getExtras().getDouble("lng");
+				// address.setText(lat + "," + lng);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	// 返回键
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			CallerDetailActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

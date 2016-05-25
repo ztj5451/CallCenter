@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="bells">
+        <item>bell_1.mp3</item>
+        <item>bell_2.mp3</item>
+        <item>bell_3.mp3</item>
+        <item>bell_4.mp3</item>
+        <item>bell_5.mp3</item>
+        <item>bell_6.mp3</item>
+        <item>bell_7.mp3</item>
+        <item>bell_8.mp3</item>
+        <item>bell_9.mp3</item>
+        <item>bell_10.mp3</item>
+        <item>bell_11.mp3</item>
+        <item>bell_12.mp3</item>
+        <item>bell_13.mp3</item>
+        <item>bell_14.mp3</item>
+        <item>bell_15.mp3</item>
+        <item>bell_16.mp3</item>
+        <item>bell_17.mp3</item>
+        <item>bell_18.mp3</item>
+        <item>bell_19.mp3</item>
+        <item>bell_20.mp3</item>
+        <item>bell_21.mp3</item>
+    </string-array>
+</resources>

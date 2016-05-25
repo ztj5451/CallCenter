@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/title_bar"
+            android:gravity="center_horizontal|center_vertical" >
+
+            <TextView
+                style="@style/title_barText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gwstart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_back"
+                android:text="@string/bar_back"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" >
+
+            <Button
+                android:id="@+id/gwStart"
+                android:layout_width="65dp"
+                android:layout_height="33dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/ic_bar_ok"
+                android:text="@string/gw_start"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- 显示通知公告 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/receiverBm"
+                            style="@style/MMLineEditText"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:focusable="false"
+                            android:hint="@string/gw_select"
+                            android:inputType="none" />
+
+                        <Button
+                            android:id="@+id/selectBm"
+                            style="@style/MMLineActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/receiver" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
+
+                        <EditText
+                            android:id="@+id/attribute"
+                            style="@style/MMLineEditText"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:focusable="false"
+                            android:hint="客户属性"
+                            android:inputType="none" />
+
+                        <Button
+                            android:id="@+id/selectAttr"
+                            style="@style/MMLineActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="客户属性"
+                            android:visibility="gone" />
+
+                        <Spinner
+                            android:id="@+id/attrSpinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/serverTime"
+                            style="@style/MMLineEditText"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:focusable="false"
+                            android:hint="服务开始时间"
+                            android:inputType="none" />
+
+                        <Button
+                            android:id="@+id/selectTime"
+                            style="@style/MMLineActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="服务开始时间" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="服务简介" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/introduction"
+                    style="@style/MMLineMutilEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="@string/gw_content"
+                    android:lines="5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="备注" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/remarks"
+                    style="@style/MMLineMutilEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:hint="@string/gw_title"
+                    android:lines="3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="客户信息" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="vertical" >
+
+                    <!-- 当前账户余额 -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_top_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="账户余额:" />
+
+                        <TextView
+                            android:id="@+id/money"
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="100"
+                            android:textColor="#FF0000" />
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="元(人民币)"
+                            android:textColor="#FF0000" />
+                    </LinearLayout>
+                    <!-- 客户姓名 -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="客户名称:" />
+
+                        <TextView
+                            android:id="@+id/name"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="张三" />
+                    </LinearLayout>
+                    <!-- 性别 -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="性      别:" />
+
+                        <TextView
+                            android:id="@+id/sex"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="先生" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="年    龄:" />
+
+                        <TextView
+                            android:id="@+id/age"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="58" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="住    址:" />
+
+                        <TextView
+                            android:id="@+id/address"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="吉林省长春市南关区" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="电    话:" />
+
+                        <TextView
+                            android:id="@+id/tel"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="13578918907" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="客户沟通难易程度:" />
+
+                        <TextView
+                            android:id="@+id/gtnd"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="困难" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="客户简介:" />
+
+                        <TextView
+                            android:id="@+id/khjj"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="fdsfsdfsdfdsf" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tdLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="退单备注:"
+                            android:textColor="#FF0000" />
+
+                        <TextView
+                            android:id="@+id/tdbeizhu"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="fdsfsdfsdfdsf" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="待办事项:" />
+
+                        <TextView
+                            android:id="@+id/wait"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="fsdfsdfsdfsd" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="办事级别:" />
+
+                        <TextView
+                            android:id="@+id/level"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="普通办事" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/about_mid_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="时间:" />
+
+                        <TextView
+                            android:id="@+id/time"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="2014-06-19 18:37:35" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/about_bottom_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            style="@style/userInfo_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="客户备注:" />
+
+                        <TextView
+                            android:id="@+id/bz"
+                            style="@style/userInfo_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:lines="3"
+                            android:text="发大水发大水分水电费佛挡杀佛" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

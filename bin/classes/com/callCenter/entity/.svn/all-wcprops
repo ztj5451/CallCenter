@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity
+END
+JdDetail.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/JdDetail.java
+END
+RechargeCustom.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/RechargeCustom.java
+END
+QyInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/QyInfo.java
+END
+LoginUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/LoginUser.java
+END
+SelectPerson.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/SelectPerson.java
+END
+GwgzDetail.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/GwgzDetail.java
+END
+TzMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/TzMessage.java
+END
+KeyAndValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/entity/KeyAndValue.java
+END
+Gwsp.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/entity/Gwsp.java
+END
+Picture.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Picture.java
+END
+GdFinish.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/entity/GdFinish.java
+END
+GwpfDetail.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/GwpfDetail.java
+END
+ServerPersonJD.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/entity/ServerPersonJD.java
+END
+CallPhone.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/CallPhone.java
+END
+Cuiban.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Cuiban.java
+END
+GwspDetail.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/GwspDetail.java
+END
+GwStart.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/GwStart.java
+END
+Customer.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Customer.java
+END
+CustomerGy.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/CustomerGy.java
+END
+Data.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Data.java
+END
+GwGz.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/GwGz.java
+END
+Area.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Area.java
+END
+WorkOrder.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/WorkOrder.java
+END
+Gwpf.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/CallCenter/!svn/ver/3/CallCenter/src/com/callCenter/entity/Gwpf.java
+END
+Type.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Type.java
+END
+Bm.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/Bm.java
+END
+GD.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/CallCenter/!svn/ver/2/CallCenter/src/com/callCenter/entity/GD.java
+END

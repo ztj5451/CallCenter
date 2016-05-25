@@ -1,0 +1,73 @@
+package com.callCenter.adapter;
+
+import java.util.List;
+
+import com.callCenter.activity.R;
+import com.callCenter.entity.Area;
+import com.callCenter.entity.GwgzDetail;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class DetailAdapter extends BaseAdapter {
+	private Context mContext;
+
+	private List<GwgzDetail> mareaList;
+
+	public DetailAdapter(Context context, List<GwgzDetail> areaList) {
+		mContext = context;
+		mareaList = areaList;
+	}
+
+	public int getCount() {
+		return mareaList.size();
+	}
+
+	public Object getItem(int position) {
+		return mareaList.get(position);
+	}
+
+	public long getItemId(int position) {
+		return position;
+	}
+
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder = null;
+		if (convertView == null) {
+			convertView = LayoutInflater.from(mContext).inflate(
+					R.layout.detail_item, null);
+			holder = new ViewHolder();
+			holder.name = (TextView) convertView.findViewById(R.id.bmname);
+			holder.zt = (TextView) convertView.findViewById(R.id.zt);
+			holder.state = (ImageView) convertView.findViewById(R.id.state);
+
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+
+		holder.name.setText(mareaList.get(position).getBmName());
+		holder.zt.setText(mareaList.get(position).getZt());
+		if (mareaList.get(position).getZt().equals("未受理")) {
+			holder.state.setImageResource(R.drawable.wsl);
+		} else if (mareaList.get(position).getZt().equals("已受理")) {
+			holder.state.setImageResource(R.drawable.ysl);
+		} else if (mareaList.get(position).getZt().equals("转办")) {
+			holder.state.setImageResource(R.drawable.zb);
+		} else if (mareaList.get(position).getZt().equals("退单")) {
+			holder.state.setImageResource(R.drawable.td);
+		}
+		return convertView;
+	}
+
+	class ViewHolder {
+
+		TextView name, zt;
+		ImageView state;
+	}
+}

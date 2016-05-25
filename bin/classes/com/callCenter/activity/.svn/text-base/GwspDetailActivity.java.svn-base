@@ -1,0 +1,401 @@
+package com.callCenter.activity;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.callCenter.entity.Data;
+import com.callCenter.entity.GwspDetail;
+import com.callCenter.utils.HandlerException;
+import com.callCenter.utils.HttpConnectUtil;
+import com.callCenter.utils.SettingUtils;
+
+import android.R.integer;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ImageView.ScaleType;
+
+public class GwspDetailActivity extends Activity {
+
+	private TextView kh_name, kh_age, kh_sex, kh_address, kh_tel, kh_jj,
+			kh_goutong, kh_pic, jianjie, beizhu, jdbeizhu, jibie, kh_sx,
+			starttime, lsh, qsum, xsum, username, contents, scry;
+	private LinearLayout scryLinear;
+	private String isShow = "";
+	private SettingUtils settingUtils;
+	private GwspDetail gwspDetail;
+	private Data data;
+	private List<String> images;
+	private String id, gwid, loginname, bmId;
+	private LinearLayout imageList;
+	private StringBuffer tempScry;
+
+	private Handler handler2 = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case HandlerException.Success:
+				showImages();
+				break;
+			case HandlerException.Fail:
+				break;
+			case HandlerException.HttpURLConnection_not_HTTP_OK:
+				break;
+			case HandlerException.IOException:
+				break;
+			case HandlerException.AllSuccess:
+				Toast.makeText(GwspDetailActivity.this, "退单成功!",
+						Toast.LENGTH_LONG).show();
+				break;
+			default:
+
+				break;
+			}
+		};
+	};
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case HandlerException.Success:
+				setValue();
+				startDownLoad();
+				break;
+			case HandlerException.Fail:
+				break;
+			case HandlerException.HttpURLConnection_not_HTTP_OK:
+				break;
+			case HandlerException.IOException:
+				break;
+			default:
+
+				break;
+			}
+		};
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.gwsp_detail);
+		init();
+		Event();
+		new Thread() {
+			public void run() {
+				gwspDetailAction(gwspDetailUrl());
+			};
+		}.start();
+
+	}
+
+	private void showImages() {
+		if (images.size() != 0) {
+			for (int i = 0; i < images.size(); i++) {
+				if (new File(SettingUtils.get("temp_dir") + "/" + images.get(i))
+						.exists()) {
+
+					Bitmap bitmap = HttpConnectUtil
+							.getLoacalBitmap(SettingUtils.get("temp_dir") + "/"
+									+ images.get(i));
+					setImage(bitmap);
+				}
+			}
+		}
+	}
+
+	private void startDownLoad() {
+		new Thread() {
+			public void run() {
+				downLoadImages();
+			};
+		}.start();
+	}
+
+	private String imageUrl(String fileName) {
+		StringBuffer imageUrl = new StringBuffer(gwspDetail.getRealpath())
+				.append("/");
+		imageUrl.append(fileName);
+		return imageUrl.toString();
+	}
+
+	private void downLoadImages() {
+		int i = 0;
+		for (; i < images.size(); i++) {
+			try {
+				HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+						imageUrl(images.get(i)), "GET");
+				if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+					handler2.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+				} else {
+					InputStream inputStream = httpURLConnection
+							.getInputStream();
+					HttpConnectUtil.saveIntentImage(inputStream,
+							SettingUtils.get("temp_dir"), images.get(i));
+					if (i == (images.size() - 1)) {
+						handler2.sendEmptyMessage(HandlerException.Success);
+					} else {
+						handler2.sendEmptyMessage(HandlerException.Fail);
+					}
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+
+	private void init() {
+		id = getIntent().getExtras().getString("id");
+		gwid = getIntent().getExtras().getString("gwid");
+		loginname = getIntent().getExtras().getString("loginname");
+		bmId = getIntent().getExtras().getString("bmId");
+		settingUtils = new SettingUtils(GwspDetailActivity.this);
+		kh_name = (TextView) this.findViewById(R.id.kh_name);
+		kh_age = (TextView) this.findViewById(R.id.kh_age);
+		kh_sex = (TextView) this.findViewById(R.id.kh_sex);
+		kh_address = (TextView) this.findViewById(R.id.kh_address);
+		kh_tel = (TextView) this.findViewById(R.id.kh_tel);
+		kh_jj = (TextView) this.findViewById(R.id.kh_jj);
+		kh_goutong = (TextView) this.findViewById(R.id.kh_goutong);
+		jianjie = (TextView) this.findViewById(R.id.jianjie);
+		beizhu = (TextView) this.findViewById(R.id.beizhu);
+		jdbeizhu = (TextView) this.findViewById(R.id.jdbeizhu);
+		jibie = (TextView) this.findViewById(R.id.jibie);
+		kh_sx = (TextView) this.findViewById(R.id.kh_sx);
+		starttime = (TextView) this.findViewById(R.id.starttime);
+		lsh = (TextView) this.findViewById(R.id.lsh);
+		qsum = (TextView) this.findViewById(R.id.qsum);
+		xsum = (TextView) this.findViewById(R.id.xsum);
+		username = (TextView) this.findViewById(R.id.username);
+		contents = (TextView) this.findViewById(R.id.contents);
+		imageList = (LinearLayout) this.findViewById(R.id.image_list);
+		scry = (TextView) this.findViewById(R.id.scry);
+		scryLinear = (LinearLayout) this.findViewById(R.id.scryLinear);
+	}
+
+	private void setValue() {
+		kh_name.setText(gwspDetail.getKh_name());
+		kh_age.setText(gwspDetail.getKh_age());
+		kh_sex.setText(gwspDetail.getKh_sex());
+		kh_address.setText(gwspDetail.getKh_address());
+		kh_tel.setText(gwspDetail.getKh_tel());
+		kh_jj.setText(gwspDetail.getKh_jj());
+		kh_goutong.setText(gwspDetail.getKh_goutong());
+		jianjie.setText(gwspDetail.getJianjie());
+		beizhu.setText(gwspDetail.getBeizhu());
+		jdbeizhu.setText(gwspDetail.getJdbeizhu());
+		jibie.setText(gwspDetail.getJibie());
+		kh_sx.setText(gwspDetail.getKh_sx());
+		starttime.setText(gwspDetail.getStarttime());
+		lsh.setText(gwspDetail.getLsh());
+		qsum.setText(gwspDetail.getQsum());
+		xsum.setText(gwspDetail.getXsum());
+		username.setText(data.getUsername());
+		contents.setText(data.getContents());
+		scry.setText(tempScry.toString());
+		if (isShow.equals("0")) {
+			scryLinear.setVisibility(View.VISIBLE);
+		}
+
+	}
+
+	private void Event() {
+		// 返回按钮
+		this.findViewById(R.id.backBtn).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						deleteImage();
+						GwspDetailActivity.this.finish();
+						overridePendingTransition(R.anim.in_to_right,
+								R.anim.out_from_left);
+
+					}
+				});
+		// 退单按钮
+		this.findViewById(R.id.tuidan).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View arg0) {
+						// new Thread() {
+						// public void run() {
+						// gwtdAction(gwtdUrl());
+						// };
+						// }.start();
+						Intent intent = new Intent(GwspDetailActivity.this,
+								TdActivity.class);
+						intent.putExtra("id", id);
+						intent.putExtra("gwId", gwid);
+						intent.putExtra("loginname", loginname);
+						intent.putExtra("bmId", bmId);
+						startActivity(intent);
+						overridePendingTransition(R.anim.in_from_right,
+								R.anim.out_to_left);
+
+					}
+				});
+
+	}
+
+	
+	// 公文发起URL
+	private StringBuffer gwspDetailUrl() {
+		StringBuffer gwspDetailUrl = new StringBuffer(
+				SettingUtils.get("serverIp"));
+		gwspDetailUrl.append(SettingUtils.get("gwsp_detail_url")).append("id=")
+				.append(id).append("&gwid=").append(gwid);
+		System.out.println("公文审批详细内容:" + gwspDetailUrl);
+		return gwspDetailUrl;
+	}
+
+	// 工单派发
+	@SuppressLint("NewApi")
+	private void gwspDetailAction(StringBuffer gwspDetailUrl) {
+		try {
+			HttpURLConnection httpURLConnection = HttpConnectUtil.connect(
+					gwspDetailUrl, "GET");
+			if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				handler.sendEmptyMessage(HandlerException.HttpURLConnection_not_HTTP_OK);
+			} else {
+				InputStream inputStream = httpURLConnection.getInputStream();
+				String message = HttpConnectUtil.getHttpStream(inputStream);
+				message = message.replaceAll("null", "");
+				String[] msg = message.split("#");
+				JSONObject content1 = new JSONObject(msg[0]);
+				JSONObject content2 = new JSONObject(msg[1]);
+				JSONObject khJson = new JSONObject(
+						content1.getString("contents1"));
+				JSONArray array = new JSONArray(content2.getString("contents2"));
+				if (!khJson.toString().isEmpty()) {
+					gwspDetail = new GwspDetail();
+					gwspDetail.setKh_name(khJson.getString("kh_name"));
+					gwspDetail.setKh_age(khJson.getString("kh_age"));
+					gwspDetail.setKh_sex(khJson.getString("kh_sex"));
+					gwspDetail.setKh_address(khJson.getString("kh_address"));
+					gwspDetail.setKh_tel(khJson.getString("kh_tel"));
+					gwspDetail.setKh_jj(khJson.getString("kh_jj"));
+					gwspDetail.setKh_goutong(khJson.getString("kh_goutong"));
+					gwspDetail.setKh_pic(khJson.getString("kh_pic"));
+					gwspDetail.setJianjie(khJson.getString("jianjie"));
+					gwspDetail.setBeizhu(khJson.getString("beizhu"));
+					gwspDetail.setJdbeizhu(khJson.getString("jdbeizhu"));
+					gwspDetail.setJibie(khJson.getString("jibie"));
+					gwspDetail.setKh_sx(khJson.getString("kh_sx"));
+					gwspDetail.setStarttime(khJson.getString("starttime"));
+					gwspDetail.setLsh(khJson.getString("lsh"));
+					gwspDetail.setQsum(khJson.getString("qsum"));
+					gwspDetail.setXsum(khJson.getString("xsum"));
+					gwspDetail.setRealpath(khJson.getString("realpath"));
+				}
+
+				if (array.length() != 0) {
+					tempScry = new StringBuffer();
+					for (int i = 0; i < array.length(); i++) {
+						JSONObject obj = array.getJSONObject(i);
+
+						if (obj.getString("hz").equals("1")) {
+							images = new ArrayList<String>();
+							data = new Data();
+							data.setUsername(obj.getString("username"));
+							if (obj.getString("flag").equals("0")) {
+								String[] temp = obj.getString("pic").split("@");
+								for (int j = 0; j < temp.length; j++) {
+									images.add(temp[j]);
+								}
+
+							} else if (obj.getString("flag").equals("1")) {
+								if (!obj.getString("pic1").equals("")) {
+									images.add(obj.getString("pic1"));
+								}
+								if (!obj.getString("pic2").equals("")) {
+									images.add(obj.getString("pic2"));
+								}
+								if (!obj.getString("pic3").equals("")) {
+									images.add(obj.getString("pic3"));
+								}
+							}
+							data.setContents(obj.getString("contents"));
+						} else if (obj.getString("hz").equals("0")) {
+							isShow = obj.getString("hz").toString();
+							tempScry.append(obj.getString("username"))
+									.append("    ").append("回执图片")
+									.append("  (无) ").append(" 回执返回: ")
+									.append("  (无) ").append("\n");
+						}
+
+					}
+				}
+				handler.sendEmptyMessage(HandlerException.Success);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			handler.sendEmptyMessage(HandlerException.IOException);
+		}
+	}
+
+	// 获取取证材料图片
+	public void setImage(Bitmap bitmap) {
+
+		ImageView imageView = new ImageView(this);
+		ImageView hr = new ImageView(this);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100,
+				100);
+		params.setMargins(5, 5, 5, 5);
+		imageView.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
+		imageView.setScaleType(ScaleType.CENTER);
+		imageView.setAdjustViewBounds(true);
+		imageView.setMaxHeight(460);
+		imageView.setMaxWidth(460);
+		Drawable d = this.getResources().getDrawable(R.drawable.hr);
+		hr.setImageDrawable(d);
+		imageView.setImageBitmap(bitmap);
+		imageList.addView(hr);
+		imageList.addView(imageView);
+
+	}
+
+	private void deleteImage() {
+		if (images.size() != 0) {
+			for (int i = 0; i < images.size(); i++) {
+				File temp = new File(SettingUtils.get("temp_dir") + "/"
+						+ images.get(i));
+				if (temp.exists()) {
+					temp.delete();
+				}
+			}
+		}
+	}
+
+	// 按下返回按钮
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			deleteImage();
+			GwspDetailActivity.this.finish();
+			overridePendingTransition(R.anim.in_to_right, R.anim.out_from_left);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}
